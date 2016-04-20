@@ -16,7 +16,7 @@ namespace TextAndPizza
     {
 
         String name = "Text & Pizza";
-        String vno = "0.4";
+        String vno = "0.5";
         List<String> ChatLog;
         int ChatLogNum;
         Boolean goNorth = false;
@@ -178,83 +178,69 @@ namespace TextAndPizza
             {
                 PrintMessage(Balance + " Gold");
             }
-            else if (s == "north" || s == "go north")
-            {
-                goNorth = true;
-                MapRooms();
-            }
-            else if (s == "south" || s == "go south")
-            {
-                goSouth = true;
-                MapRooms();
-            }
-            else if (s == "west" || s == "go west")
-            {
-                goWest = true;
-                MapRooms();
-            }
-            else if (s == "east" || s == "go east")
-            {
-                goEast = true;
-                MapRooms();
-            }
             else if (s.Contains("go "))
             {
-                Image img = CompassBox.Image;
-                int CorrectMove = 0;
-                if (s.Contains(" ahead") || s.Contains(" forward"))
+                if (!isBlocked())
                 {
-                    AngleCorrections();
-                    CorrectMove++;
-                }
-                else if (s.Contains(" right"))
-                {
-                    Direction = Direction + 1;
-                    img.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                    AngleCorrections();
-                    CorrectMove++;
-                }
-                else if (s.Contains(" left"))
-                {
-                    Direction = Direction - 1;
-                    img.RotateFlip(RotateFlipType.Rotate90FlipNone);
-                    AngleCorrections();
-                    CorrectMove++;
-                }
-                else if (s.Contains(" back") || s.Contains(" backwards"))
-                {
-                    Direction = Direction + 2;
-                    img.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                    AngleCorrections();
-                    CorrectMove++;
-                }
-                CompassBox.Image = img;
-                if (CorrectMove != 0)
-                {
-                    if (Direction == 0)
+                    Image img = CompassBox.Image;
+                    int CorrectMove = 0;
+                    if (s.Contains(" ahead") || s.Contains(" forward"))
                     {
-                        goNorth = true;
-                        MapRooms();
+                        AngleCorrections();
+                        CorrectMove++;
                     }
-                    if (Direction == 1)
+                    else if (s.Contains(" right"))
                     {
-                        goEast = true;
-                        MapRooms();
+                        Direction = Direction + 1;
+                        img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        AngleCorrections();
+                        CorrectMove++;
                     }
-                    if (Direction == 2)
+                    else if (s.Contains(" left"))
                     {
-                        goSouth = true;
-                        MapRooms();
+                        Direction = Direction - 1;
+                        img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        AngleCorrections();
+                        CorrectMove++;
                     }
-                    if (Direction == 3)
+                    else if (s.Contains(" back") || s.Contains(" backwards"))
                     {
-                        goWest = true;
-                        MapRooms();
+                        Direction = Direction + 2;
+                        img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                        AngleCorrections();
+                        CorrectMove++;
                     }
-                }
-                else
+                    CompassBox.Image = img;
+                    if (CorrectMove != 0)
+                    {
+                        if (Direction == 0)
+                        {
+                            goNorth = true;
+                            MapRooms();
+                        }
+                        if (Direction == 1)
+                        {
+                            goEast = true;
+                            MapRooms();
+                        }
+                        if (Direction == 2)
+                        {
+                            goSouth = true;
+                            MapRooms();
+                        }
+                        if (Direction == 3)
+                        {
+                            goWest = true;
+                            MapRooms();
+                        }
+                    }
+                    else
+                    {
+                        PrintMessage("That direction does not exist");
+                    }
+                } else
                 {
-                    PrintMessage("That direction does not exist");
+                    PrintMessage("You can't leave this room until all of the monsters are gone!");
                 }
             }
             else if (s == "quit")
@@ -654,47 +640,19 @@ namespace TextAndPizza
             //Other
             if (goNorth)
             {
-                if (!isBlocked())
-                {
                     EnterRoom(CurrentRoom.NorthExit);
-                }
-                else
-                {
-                    PrintMessage("You can't leave this room until all of the monsters are gone!");
-                }
             }
             else if (goSouth)
             {
-                if (!isBlocked())
-                {
                     EnterRoom(CurrentRoom.SouthExit);
-                }
-                else
-                {
-                    PrintMessage("You can't leave this room until all of the monsters are gone!");
-                }
             }
             else if (goEast)
             {
-                if (!isBlocked())
-                {
                     EnterRoom(CurrentRoom.EastExit);
-                }
-                else
-                {
-                    PrintMessage("You can't leave this room until all of the monsters are gone!");
-                }
             }
             else if (goWest)
             {
-                if (!isBlocked())
-                {
                     EnterRoom(CurrentRoom.WestExit);
-                }
-                else
-                {
-                    PrintMessage("You can't leave this room until all of the monsters are gone!");
-                }
             }
             else
             {
