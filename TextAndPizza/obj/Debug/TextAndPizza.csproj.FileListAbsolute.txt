@@ -6,3 +6,4 @@ C:\Users\townej\Documents\Visual Studio 2015\Projects\TextAndPizza\TextAndPizza\
 C:\Users\townej\Documents\Visual Studio 2015\Projects\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.csproj.GenerateResource.Cache
 C:\Users\townej\Documents\Visual Studio 2015\Projects\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.exe
 C:\Users\townej\Documents\Visual Studio 2015\Projects\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.pdb
+C:\Users\townej\documents\visual studio 2015\Projects\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.csprojResolveAssemblyReference.cache

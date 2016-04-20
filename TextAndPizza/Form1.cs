@@ -289,44 +289,47 @@ namespace TextAndPizza
                     }
                 }
             }
-            else if (s.Contains("get") || s.Contains("pick up"))
+            else if (s.Contains("get ") || s.Contains("pick up "))
             {
-                s = s.Replace(" the", "");
-                s = s.Replace("pick up", "pickup");
-                String[] words = s.Split(' ');
-                if (words.Length > 1)
+                if (CurrentRoom.getItems() != null)
                 {
-                    for (int i = 2; i < words.Length; i++)
+                    s = s.Replace(" the", "");
+                    s = s.Replace("pick up", "pickup");
+                    String[] words = s.Split(' ');
+                    if (words.Length > 1)
                     {
-                        words[1] = words[1] + " " + words[i];
-                    }
-                    List<Item> Items = CurrentRoom.getItems();
-                    List<Item> PickupItems = new List<Item>();
-                    int ItmCounter = 0;
-                    foreach (Item itm in Items)
-                    {
-                        if (words[1] == itm.getName().ToLower())
+                        for (int i = 2; i < words.Length; i++)
                         {
-                            PickupItems.Add(itm);
-                            Inventory.Add(itm);
-                            Player.setDefence(Player.getDefence() + itm.getDefenceStats());
-                            Player.setStrength(Player.getStrength() + itm.getStrengthStats());
-                            ItmCounter++;
-                            PrintMessage("You have picked up the " + itm.getName().ToLower() + ".");
+                            words[1] = words[1] + " " + words[i];
+                        }
+                        List<Item> Items = CurrentRoom.getItems();
+                        List<Item> PickupItems = new List<Item>();
+                        int ItmCounter = 0;
+                        foreach (Item itm in Items)
+                        {
+                            if (words[1] == itm.getName().ToLower())
+                            {
+                                PickupItems.Add(itm);
+                                Inventory.Add(itm);
+                                Player.setDefence(Player.getDefence() + itm.getDefenceStats());
+                                Player.setStrength(Player.getStrength() + itm.getStrengthStats());
+                                ItmCounter++;
+                                PrintMessage("You have picked up the " + itm.getName().ToLower() + ".");
+                            }
+                        }
+                        foreach (Item itm in PickupItems)
+                        {
+                            CurrentRoom.getItems().Remove(itm);
+                        }
+                        if (ItmCounter == 0)
+                        {
+                            PrintMessage("That item is not in this here!");
                         }
                     }
-                    foreach (Item itm in PickupItems)
+                    else
                     {
-                        CurrentRoom.getItems().Remove(itm);
+                        PrintMessage("Try typing 'get the object'");
                     }
-                    if (ItmCounter == 0)
-                    {
-                        PrintMessage("That item is not in this here!");
-                    }
-                }
-                else
-                {
-                    PrintMessage("Try typing 'get the object'");
                 }
             }
             else if (s.Contains("throw away") || s.Contains("put down"))
@@ -587,11 +590,9 @@ namespace TextAndPizza
 
             //DungeonRoomC
             DungeonRoomC = new Room("Dungeon Room",
-                "a cold stony dungeon room, lit by some torches on the walls, which provide almost no heat."
-                );
+                "a cold stony dungeon room, lit by some torches on the walls, which provide almost no heat.");
             Item Sword1 = new Item("Iron Sword",
-                "an old, slightly rusty iron sword"
-                );
+                "an old, slightly rusty iron sword");
             Sword1.setStats(2, 0);
             //Item Sword1 = new Item(name, desc);
             List<Item> DungeonRoomCItems = new List<Item>();
@@ -600,11 +601,9 @@ namespace TextAndPizza
 
             //DungeonRoomN
             DungeonRoomN = new Room("Dungeon Room",
-                "a cold stony dungeon room, damp to the touch, and lit only by the light shining through from the south door."
-                );
+                "a cold stony dungeon room, damp to the touch, and lit only by the light shining through from the south door.");
             Item DeadTorch1 = new Item("Extinguished Torch",
-                "lying on the ground. It may have been put out by the dampness"
-                );
+                "lying on the ground. It may have been put out by the dampness");
             List<Item> DungeonRoomNItems = new List<Item>();
             Zombie1.setDescription("a rotting corpse that looks somehow... Alive...");
             List<Entity> DungeonRoomNEntities = new List<Entity>();
@@ -615,11 +614,9 @@ namespace TextAndPizza
 
             //DungeonRoomE
             DungeonRoomE = new Room("Dungeon Room",
-                "far better lit than all of the other rooms, and it feels significantly warmer too"
-                );
+                "far better lit than all of the other rooms, and it feels significantly warmer too");
             Item Chestplate1 = new Item("Iron Chestplate",
-                "a slightly worn out iron chestplate"
-                );
+                "a slightly worn out iron chestplate");
             Chestplate1.setStats(0, 3);
             List<Item> DungeonRoomEItems = new List<Item>();
             DungeonRoomEItems.Add(Chestplate1);
@@ -627,8 +624,7 @@ namespace TextAndPizza
 
             //DungeonRoomExit
             DungeonRoomExit = new Room("Exit",
-                "a nice and refreshingly breezy room, with light flowing in from outside!"
-                );
+                "a nice and refreshingly breezy room, with light flowing in from outside!");
             //Map Exits
             DungeonRoomC.setNorthExit(DungeonRoomN);
             DungeonRoomN.setSouthExit(DungeonRoomC);
