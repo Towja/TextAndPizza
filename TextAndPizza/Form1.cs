@@ -23,33 +23,19 @@ namespace TextAndPizza
         Boolean goSouth = false;
         Boolean goEast = false;
         Boolean goWest = false;
-        Entity Player = new Entity("You", 10, 5, 5);
-        int Balance;
-        List<Item> Inventory = new List<Item>();
-        Room CurrentRoom;
-        //Declare rooms
-        Room DungeonRoomC;
-        Room DungeonRoomN;
-        Room DungeonRoomS;
-        Room DungeonRoomE;
-        Room DungeonRoomW;
-        Room DungeonRoomExit;
-        public int Direction;
-        Entity Zombie1 = new Entity("Zombie", 10, 6, 4);
+        World GameWorld;
 
         public MainForm()
         {
             InitializeComponent();
             this.AcceptButton = null;
             this.ActiveControl = InputBox;
-            //Player.setDead(false);
             PrintMessage("Welcome to " + name + " v" + vno + Environment.NewLine + "Type 'help' for help.");
-            Player.setDescription("Looking good!");
-            Direction = 0;
             ChatLog = new List<String>();
             ChatLogNum = ChatLog.Count();
-            Balance = 0;
-            MapRooms();
+
+            // Initalize the world
+            GameWorld = new World();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -63,7 +49,7 @@ namespace TextAndPizza
             if (r != null)
             {
                 PrintMessage(RoomString(r));
-                CurrentRoom = r;
+                GameWorld.CurrentRoom = r;
             }
             else
             {
@@ -74,11 +60,11 @@ namespace TextAndPizza
             goEast = false;
             goWest = false;
             List<Item> ToRemove = new List<Item>();
-            if (CurrentRoom.getItems() != null)
+            if (GameWorld.CurrentRoom.getItems() != null)
             {
-                foreach (Item itm in Inventory)
+                foreach (Item itm in GameWorld.Inventory)
                 {
-                    foreach (Item rmitm in CurrentRoom.getItems())
+                    foreach (Item rmitm in GameWorld.CurrentRoom.getItems())
                     {
                         if (itm == rmitm)
                         {
@@ -88,7 +74,7 @@ namespace TextAndPizza
                 }
                 foreach (Item itm in ToRemove)
                 {
-                    CurrentRoom.getItems().Remove(itm);
+                    GameWorld.CurrentRoom.getItems().Remove(itm);
                 }
             }
         }
@@ -135,17 +121,17 @@ namespace TextAndPizza
 
         public void AngleCorrections()
         {
-            if (Direction == 5)
+            if (GameWorld.Direction == 5)
             {
-                Direction = 1;
+                GameWorld.Direction = 1;
             }
-            if (Direction == 4)
+            if (GameWorld.Direction == 4)
             {
-                Direction = 0;
+                GameWorld.Direction = 0;
             }
-            if (Direction < 0)
+            if (GameWorld.Direction < 0)
             {
-                Direction = Direction * -1;
+                GameWorld.Direction = GameWorld.Direction * -1;
             }
         }
 
@@ -161,7 +147,7 @@ namespace TextAndPizza
         public void RunCommand(String s)
         {
             ChatLog.Add(s);
-            if (Player.isDead())
+            if (GameWorld.Player.isDead())
             {
                 s = "quit";
             }
@@ -176,7 +162,7 @@ namespace TextAndPizza
             }
             else if (s == "balance" || s == "purse")
             {
-                PrintMessage(Balance + " Gold");
+                PrintMessage(GameWorld.Balance + " Gold");
             }
             else if (s.Contains("go "))
             {
@@ -191,21 +177,21 @@ namespace TextAndPizza
                     }
                     else if (s.Contains(" right"))
                     {
-                        Direction = Direction + 1;
+                        GameWorld.Direction = GameWorld.Direction + 1;
                         img.RotateFlip(RotateFlipType.Rotate270FlipNone);
                         AngleCorrections();
                         CorrectMove++;
                     }
                     else if (s.Contains(" left"))
                     {
-                        Direction = Direction - 1;
+                        GameWorld.Direction = GameWorld.Direction - 1;
                         img.RotateFlip(RotateFlipType.Rotate90FlipNone);
                         AngleCorrections();
                         CorrectMove++;
                     }
                     else if (s.Contains(" back") || s.Contains(" backwards"))
                     {
-                        Direction = Direction + 2;
+                        GameWorld.Direction = GameWorld.Direction + 2;
                         img.RotateFlip(RotateFlipType.Rotate180FlipNone);
                         AngleCorrections();
                         CorrectMove++;
@@ -213,22 +199,22 @@ namespace TextAndPizza
                     CompassBox.Image = img;
                     if (CorrectMove != 0)
                     {
-                        if (Direction == 0)
+                        if (GameWorld.Direction == 0)
                         {
                             goNorth = true;
                             MapRooms();
                         }
-                        if (Direction == 1)
+                        if (GameWorld.Direction == 1)
                         {
                             goEast = true;
                             MapRooms();
                         }
-                        if (Direction == 2)
+                        if (GameWorld.Direction == 2)
                         {
                             goSouth = true;
                             MapRooms();
                         }
-                        if (Direction == 3)
+                        if (GameWorld.Direction == 3)
                         {
                             goWest = true;
                             MapRooms();
@@ -259,9 +245,9 @@ namespace TextAndPizza
                         words[1] = words[1] + " " + words[i];
                     }
                     int Counter = 0;
-                    if (CurrentRoom.getItems() != null)
+                    if (GameWorld.CurrentRoom.getItems() != null)
                     {
-                        List<Item> Items = CurrentRoom.getItems();
+                        List<Item> Items = GameWorld.CurrentRoom.getItems();
                         foreach (Item itm in Items)
                         {
                             if (words[1] == itm.getName().ToLower())
@@ -271,9 +257,9 @@ namespace TextAndPizza
                             }
                         }
                     }
-                    if (CurrentRoom.getEntities() != null)
+                    if (GameWorld.CurrentRoom.getEntities() != null)
                     {
-                        List<Entity> Entities = CurrentRoom.getEntities();
+                        List<Entity> Entities = GameWorld.CurrentRoom.getEntities();
                         foreach (Entity en in Entities)
                         {
                             if (words[1] == en.getName().ToLower())
@@ -291,7 +277,7 @@ namespace TextAndPizza
             }
             else if (s.Contains("get ") || s.Contains("pick up "))
             {
-                if (CurrentRoom.getItems() != null)
+                if (GameWorld.CurrentRoom.getItems() != null)
                 {
                     s = s.Replace(" the", "");
                     s = s.Replace("pick up", "pickup");
@@ -302,7 +288,7 @@ namespace TextAndPizza
                         {
                             words[1] = words[1] + " " + words[i];
                         }
-                        List<Item> Items = CurrentRoom.getItems();
+                        List<Item> Items = GameWorld.CurrentRoom.getItems();
                         List<Item> PickupItems = new List<Item>();
                         int ItmCounter = 0;
                         foreach (Item itm in Items)
@@ -310,16 +296,16 @@ namespace TextAndPizza
                             if (words[1] == itm.getName().ToLower())
                             {
                                 PickupItems.Add(itm);
-                                Inventory.Add(itm);
-                                Player.setDefence(Player.getDefence() + itm.getDefenceStats());
-                                Player.setStrength(Player.getStrength() + itm.getStrengthStats());
+                                GameWorld.Inventory.Add(itm);
+                                GameWorld.Player.setDefence(GameWorld.Player.getDefence() + itm.getDefenceStats());
+                                GameWorld.Player.setStrength(GameWorld.Player.getStrength() + itm.getStrengthStats());
                                 ItmCounter++;
                                 PrintMessage("You have picked up the " + itm.getName().ToLower() + ".");
                             }
                         }
                         foreach (Item itm in PickupItems)
                         {
-                            CurrentRoom.getItems().Remove(itm);
+                            GameWorld.CurrentRoom.getItems().Remove(itm);
                         }
                         if (ItmCounter == 0)
                         {
@@ -346,11 +332,11 @@ namespace TextAndPizza
                     {
                         words[1] = words[1] + " " + words[i];
                     }
-                    foreach (Item itm in Inventory)
+                    foreach (Item itm in GameWorld.Inventory)
                     {
                         if (words[1] == itm.getName().ToLower())
                         {
-                            CurrentRoom.Items.Add(itm);
+                            GameWorld.CurrentRoom.Items.Add(itm);
                             ToRemove.Add(itm);
                             PrintMessage("You have placed down your " + itm.getName().ToLower() + ".");
                             ItmCounter++;
@@ -362,9 +348,9 @@ namespace TextAndPizza
                     }
                     foreach (Item itm in ToRemove)
                     {
-                        Inventory.Remove(itm);
-                        Player.setDefence(Player.getDefence() - itm.getDefenceStats());
-                        Player.setStrength(Player.getStrength() - itm.getStrengthStats());
+                        GameWorld.Inventory.Remove(itm);
+                        GameWorld.Player.setDefence(GameWorld.Player.getDefence() - itm.getDefenceStats());
+                        GameWorld.Player.setStrength(GameWorld.Player.getStrength() - itm.getStrengthStats());
                     }
                 }
             }
@@ -378,15 +364,15 @@ namespace TextAndPizza
                     {
                         words[1] = words[1] + " " + words[i];
                     }
-                    if (CurrentRoom.getEntities() != null)
+                    if (GameWorld.CurrentRoom.getEntities() != null)
                     {
-                        List<Entity> Entities = CurrentRoom.getEntities();
+                        List<Entity> Entities = GameWorld.CurrentRoom.getEntities();
                         List<Entity> ToDie = new List<Entity>();
                         foreach (Entity en in Entities)
                         {
                             if (words[1] == en.getName().ToLower())
                             {
-                                Combat(Player, en);
+                                Combat(GameWorld.Player, en);
                                 if (en.isDead())
                                 {
                                     ToDie.Add(en);
@@ -400,7 +386,7 @@ namespace TextAndPizza
 
                         foreach (Entity en in ToDie)
                         {
-                            CurrentRoom.getEntities().Remove(en);
+                            GameWorld.CurrentRoom.getEntities().Remove(en);
                         }
                     }
                 }
@@ -408,7 +394,7 @@ namespace TextAndPizza
             else if (s == "inventory")
             {
                 String msg = "Inventory:" + Environment.NewLine;
-                foreach (Item itm in Inventory)
+                foreach (Item itm in GameWorld.Inventory)
                 {
                     msg = msg + "- " + itm.getName() + Environment.NewLine;
                 }
@@ -416,14 +402,14 @@ namespace TextAndPizza
             }
             else if (s == "where am i" || s == "whereami")
             {
-                PrintMessage(RoomString(CurrentRoom));
+                PrintMessage(RoomString(GameWorld.CurrentRoom));
             }
             else if (s == "stats")
             {
                 PrintMessage("==Stats==" + Environment.NewLine
-                    + "STRENGTH: " + Player.getStrength() + Environment.NewLine
-                    + "TOUGHNESS:" + Player.getDefence() + Environment.NewLine
-                    + "HEALTH: " + Player.getHealth() + "/" + Player.getMaxHealth() + Environment.NewLine
+                    + "STRENGTH: " + GameWorld.Player.getStrength() + Environment.NewLine
+                    + "TOUGHNESS:" + GameWorld.Player.getDefence() + Environment.NewLine
+                    + "HEALTH: " + GameWorld.Player.getHealth() + "/" + GameWorld.Player.getMaxHealth() + Environment.NewLine
                     );
             }
             else if (s == "help")
@@ -453,26 +439,26 @@ namespace TextAndPizza
         public string RoomString(Room r)
         {
             String msg = r.ToString();
-            if (Direction == 0)
+            if (GameWorld.Direction == 0)
             {
                 msg = msg.Replace("North ", "Ahead ");
                 msg = msg.Replace("East ", "Right ");
                 msg = msg.Replace("South of ", "Behind ");
                 msg = msg.Replace(" west ", "left ");
-            } else if (Direction == 1)
+            } else if (GameWorld.Direction == 1)
             {
                 msg = msg.Replace("North ", "Left ");
                 msg = msg.Replace("East ", " ahead ");
                 msg = msg.Replace("South ", "Right ");
                 msg = msg.Replace("West of ", "Behind ");
 
-            } else if (Direction == 2)
+            } else if (GameWorld.Direction == 2)
             {
                 msg = msg.Replace("North of ", "Behind ");
                 msg = msg.Replace("East ", "Left ");
                 msg = msg.Replace("South ", "Ahead ");
                 msg = msg.Replace("West ", "Right ");
-            } else if (Direction == 3)
+            } else if (GameWorld.Direction == 3)
             {
                 msg = msg.Replace("North ", "Right ");
                 msg = msg.Replace("East of ", "Behind ");
@@ -586,83 +572,36 @@ namespace TextAndPizza
 
         public void MapRooms()
         {
-            //Declare Rooms
-
-            //DungeonRoomC
-            DungeonRoomC = new Room("Dungeon Room",
-                "a cold stony dungeon room, lit by some torches on the walls, which provide almost no heat.");
-            Item Sword1 = new Item("Iron Sword",
-                "an old, slightly rusty iron sword");
-            Sword1.setStats(2, 0);
-            //Item Sword1 = new Item(name, desc);
-            List<Item> DungeonRoomCItems = new List<Item>();
-            DungeonRoomCItems.Add(Sword1);
-            DungeonRoomC.setItems(DungeonRoomCItems);
-
-            //DungeonRoomN
-            DungeonRoomN = new Room("Dungeon Room",
-                "a cold stony dungeon room, damp to the touch, and lit only by the light shining through from the south door.");
-            Item DeadTorch1 = new Item("Extinguished Torch",
-                "lying on the ground. It may have been put out by the dampness");
-            List<Item> DungeonRoomNItems = new List<Item>();
-            Zombie1.setDescription("a rotting corpse that looks somehow... Alive...");
-            List<Entity> DungeonRoomNEntities = new List<Entity>();
-            DungeonRoomNEntities.Add(Zombie1);
-            DungeonRoomN.setEntities(DungeonRoomNEntities);
-            DungeonRoomNItems.Add(DeadTorch1);
-            DungeonRoomN.setItems(DungeonRoomNItems);
-
-            //DungeonRoomE
-            DungeonRoomE = new Room("Dungeon Room",
-                "far better lit than all of the other rooms, and it feels significantly warmer too");
-            Item Chestplate1 = new Item("Iron Chestplate",
-                "a slightly worn out iron chestplate");
-            Chestplate1.setStats(0, 3);
-            List<Item> DungeonRoomEItems = new List<Item>();
-            DungeonRoomEItems.Add(Chestplate1);
-            DungeonRoomE.setItems(DungeonRoomEItems);
-
-            //DungeonRoomExit
-            DungeonRoomExit = new Room("Exit",
-                "a nice and refreshingly breezy room, with light flowing in from outside!");
-            //Map Exits
-            DungeonRoomC.setNorthExit(DungeonRoomN);
-            DungeonRoomN.setSouthExit(DungeonRoomC);
-            DungeonRoomC.setEastExit(DungeonRoomE);
-            DungeonRoomE.setWestExit(DungeonRoomC);
-            DungeonRoomExit.setSouthExit(DungeonRoomN);
-            DungeonRoomN.setNorthExit(DungeonRoomExit);
-
             //Other
             if (goNorth)
             {
-                    EnterRoom(CurrentRoom.NorthExit);
+                    EnterRoom(GameWorld.CurrentRoom.NorthExit);
             }
             else if (goSouth)
             {
-                    EnterRoom(CurrentRoom.SouthExit);
+                    EnterRoom(GameWorld.CurrentRoom.SouthExit);
             }
             else if (goEast)
             {
-                    EnterRoom(CurrentRoom.EastExit);
+                    EnterRoom(GameWorld.CurrentRoom.EastExit);
             }
             else if (goWest)
             {
-                    EnterRoom(CurrentRoom.WestExit);
+                    EnterRoom(GameWorld.CurrentRoom.WestExit);
             }
             else
             {
                 //Change to the room you want them to start in!
-                EnterRoom(DungeonRoomC);
+                EnterRoom(GameWorld.DungeonRoomC);
             }
         }
 
         private Boolean isBlocked()
         {
-            if (CurrentRoom.getEntities() != null)
+            if (GameWorld.CurrentRoom.getEntities() != null)
             {
                 int HostileCount = 0;
-                foreach (Entity en in CurrentRoom.getEntities())
+                foreach (Entity en in GameWorld.CurrentRoom.getEntities())
                 {
                     if (!en.isFriendly())
                     {
