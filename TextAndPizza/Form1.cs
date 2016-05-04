@@ -412,6 +412,18 @@ namespace TextAndPizza
                     + "HEALTH: " + GameWorld.Player.getHealth() + "/" + GameWorld.Player.getMaxHealth() + Environment.NewLine
                     );
             }
+            else if (s == "save")
+            {
+                GameWorld.Save();
+                PrintMessage("Game saved!" + Environment.NewLine);
+            }
+            else if (s == "load")
+            {
+                GameWorld = World.Load();
+                PrintMessage("Game loaded!" + Environment.NewLine);
+                // Print the current room's string to orient the player with their new world
+                PrintMessage(RoomString(GameWorld.CurrentRoom));
+            }
             else if (s == "help")
             {
                 PrintMessage("==Help==" + Environment.NewLine
@@ -427,7 +439,8 @@ namespace TextAndPizza
                     + "- inventory: View the contents of your inventory" + Environment.NewLine
                     + "- where am i: Get information about where you are" + Environment.NewLine
                     + "- quit: Leave the game" + Environment.NewLine
-                    + "- save: NOT YET IMPLEMENTED"
+                    + "- save: Saves the game" + Environment.NewLine
+                    + "- load: Loads a saved game" + Environment.NewLine
                     );
             }
             else

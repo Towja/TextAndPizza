@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TextAndPizza
 {
-    // 
+    // Handles all game and player state
+    [Serializable]
     class World
     {
         // Data related to the player
@@ -90,6 +95,63 @@ namespace TextAndPizza
             DungeonRoomE.setWestExit(DungeonRoomC);
             DungeonRoomExit.setSouthExit(DungeonRoomN);
             DungeonRoomN.setNorthExit(DungeonRoomExit);
+        }
+
+        // Saves the current world state to a file in the Users AppData
+        public void Save()
+        {
+            // Filename that the file will be saved to
+            string fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+
+            // Save the world
+            Stream stream = null;
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+                formatter.Serialize(stream, this);
+            }
+            catch (Exception ex)
+            {
+                // Ignore any errors
+                throw ex;
+            }
+            finally
+            {
+                // Close the file
+                if (null != stream)
+                    stream.Close();
+            }
+        }
+
+        public static World Load()
+        {
+            // Filename to load from
+            string fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+
+            // Load the file
+            Stream stream = null;
+            World savedWorld = null;
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                savedWorld = (World)formatter.Deserialize(stream);
+            }
+            catch
+            {
+                // Ignore all errors
+                // TODO: Handle having no save file
+            }
+            finally
+            {
+                // Close the file
+                if(null != stream)
+                    stream.Close();
+            }
+
+            // Return the loaded world object
+            return savedWorld;
         }
     }
 }
