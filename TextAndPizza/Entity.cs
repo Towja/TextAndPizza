@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextAndPizza
 {
+    [Serializable]
     public class Entity
     {
         public String Name { get; set; }
