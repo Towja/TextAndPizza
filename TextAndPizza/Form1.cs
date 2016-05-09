@@ -36,6 +36,7 @@ namespace TextAndPizza
 
             // Initalize the world
             GameWorld = new World();
+            PrintMessage(RoomString(GameWorld.CurrentRoom));
         }
 
         private void MainForm_Load(object sender, EventArgs e)
