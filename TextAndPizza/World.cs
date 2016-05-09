@@ -46,6 +46,13 @@ namespace TextAndPizza
             CurrentRoom = DungeonRoomC;
         }
 
+
+        //Add rooms through this (For the world builder)
+        public void AddRoom(String id, String name, String description, List<Item> items, List<Entity> entities, Room nExit, Room sExit, Room eExit, Room wExit)
+        {
+            //
+        }
+
         // Initalizes the rooms
         // TODO: Make this more generic
         public void InitalizeRooms()

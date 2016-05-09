@@ -13,10 +13,12 @@ namespace TextAndPizza
     public partial class WorldBuilder : Form
     {
         public TreeNode selected;
+        World WorldBuild;
+
         public WorldBuilder()
         {
             InitializeComponent();
-
+            WorldBuild = new World();
         }
 
         private void worldTreeView_AfterSelect(object sender, TreeViewEventArgs e)

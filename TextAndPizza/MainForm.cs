@@ -237,7 +237,7 @@ namespace TextAndPizza
                 }
                 else if (s == "quit")
                 {
-                    DialogResult Save = MessageBox.Show("Shutting Down", "Would you like to save your game?", MessageBoxButtons.YesNoCancel);
+                    DialogResult Save = MessageBox.Show("Would you like to save your game?", "Shutting Down", MessageBoxButtons.YesNoCancel);
                     if (Save == DialogResult.Yes)
                     {
                         GameWorld.Save();
