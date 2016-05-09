@@ -38,6 +38,13 @@
             this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RoomName = new System.Windows.Forms.TextBox();
+            this.RoomNameLabel = new System.Windows.Forms.Label();
+            this.ItemsLabel = new System.Windows.Forms.Label();
+            this.ItemsTree = new System.Windows.Forms.TreeView();
+            this.EntityLabel = new System.Windows.Forms.Label();
+            this.EntityTree = new System.Windows.Forms.TreeView();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,27 +103,95 @@
             // roomToolStripMenuItem
             // 
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.roomToolStripMenuItem.Text = "Room";
             this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
             // 
             // itemToolStripMenuItem
             // 
             this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemToolStripMenuItem.Text = "Item";
+            this.itemToolStripMenuItem.Click += new System.EventHandler(this.itemToolStripMenuItem_Click);
             // 
             // entityToolStripMenuItem
             // 
             this.entityToolStripMenuItem.Name = "entityToolStripMenuItem";
-            this.entityToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.entityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.entityToolStripMenuItem.Text = "Entity";
+            // 
+            // RoomName
+            // 
+            this.RoomName.Location = new System.Drawing.Point(271, 28);
+            this.RoomName.Name = "RoomName";
+            this.RoomName.Size = new System.Drawing.Size(435, 20);
+            this.RoomName.TabIndex = 2;
+            this.RoomName.TextChanged += new System.EventHandler(this.RoomName_TextChanged);
+            // 
+            // RoomNameLabel
+            // 
+            this.RoomNameLabel.AutoSize = true;
+            this.RoomNameLabel.Location = new System.Drawing.Point(196, 31);
+            this.RoomNameLabel.Name = "RoomNameLabel";
+            this.RoomNameLabel.Size = new System.Drawing.Size(69, 13);
+            this.RoomNameLabel.TabIndex = 3;
+            this.RoomNameLabel.Text = "Room Name:";
+            // 
+            // ItemsLabel
+            // 
+            this.ItemsLabel.AutoSize = true;
+            this.ItemsLabel.Location = new System.Drawing.Point(268, 72);
+            this.ItemsLabel.Name = "ItemsLabel";
+            this.ItemsLabel.Size = new System.Drawing.Size(35, 13);
+            this.ItemsLabel.TabIndex = 4;
+            this.ItemsLabel.Text = "Items:";
+            // 
+            // ItemsTree
+            // 
+            this.ItemsTree.Location = new System.Drawing.Point(271, 88);
+            this.ItemsTree.Name = "ItemsTree";
+            this.ItemsTree.Size = new System.Drawing.Size(215, 233);
+            this.ItemsTree.TabIndex = 5;
+            this.ItemsTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ItemsTree_AfterSelect);
+            // 
+            // EntityLabel
+            // 
+            this.EntityLabel.AutoSize = true;
+            this.EntityLabel.Location = new System.Drawing.Point(489, 72);
+            this.EntityLabel.Name = "EntityLabel";
+            this.EntityLabel.Size = new System.Drawing.Size(44, 13);
+            this.EntityLabel.TabIndex = 6;
+            this.EntityLabel.Text = "Entities:";
+            // 
+            // EntityTree
+            // 
+            this.EntityTree.Location = new System.Drawing.Point(492, 88);
+            this.EntityTree.Name = "EntityTree";
+            this.EntityTree.Size = new System.Drawing.Size(215, 233);
+            this.EntityTree.TabIndex = 7;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(631, 387);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 8;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // WorldBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 422);
+            this.Controls.Add(this.SaveButton);
+            this.Controls.Add(this.EntityTree);
+            this.Controls.Add(this.EntityLabel);
+            this.Controls.Add(this.ItemsTree);
+            this.Controls.Add(this.ItemsLabel);
+            this.Controls.Add(this.RoomNameLabel);
+            this.Controls.Add(this.RoomName);
             this.Controls.Add(this.worldTreeView);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -141,5 +216,12 @@
         private System.Windows.Forms.ToolStripMenuItem roomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem itemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entityToolStripMenuItem;
+        private System.Windows.Forms.TextBox RoomName;
+        private System.Windows.Forms.Label RoomNameLabel;
+        private System.Windows.Forms.Label ItemsLabel;
+        private System.Windows.Forms.TreeView ItemsTree;
+        private System.Windows.Forms.Label EntityLabel;
+        private System.Windows.Forms.TreeView EntityTree;
+        private System.Windows.Forms.Button SaveButton;
     }
 }

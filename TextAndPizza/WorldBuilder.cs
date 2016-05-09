@@ -12,6 +12,7 @@ namespace TextAndPizza
 {
     public partial class WorldBuilder : Form
     {
+        public TreeNode selected;
         public WorldBuilder()
         {
             InitializeComponent();
@@ -20,7 +21,8 @@ namespace TextAndPizza
 
         private void worldTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            selected = worldTreeView.SelectedNode;
+            RoomName.Text = selected.Text;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,12 +32,31 @@ namespace TextAndPizza
 
         private void roomToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            TreeNode roomNode = worldTreeView.Nodes.Add("New Room");
+        }
+ 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            
+        }
+
+        private void RoomName_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void ItemsTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
 
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        private void itemToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
+        }
 
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            selected.Text = RoomName.Text;
         }
     }
 }

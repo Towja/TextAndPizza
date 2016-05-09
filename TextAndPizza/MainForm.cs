@@ -36,7 +36,6 @@ namespace TextAndPizza
             PrintMessage("Welcome to " + name + " v" + vno + Environment.NewLine + "Type 'help' for help." + Environment.NewLine + "You can also type 'load' to load from a save file or 'new game' to start a new game");
             ChatLog = new List<String>();
             ChatLogNum = ChatLog.Count();
-
             // Initalize the world
             GameWorld = new World();
             //PrintMessage(RoomString(GameWorld.CurrentRoom));
