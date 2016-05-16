@@ -26,6 +26,7 @@ namespace TextAndPizza
         Boolean gameStarted = false;
         World GameWorld;
         MainForm mainForm;
+        public String worldPath;
 
         public MainForm()
         {
@@ -240,7 +241,7 @@ namespace TextAndPizza
                     DialogResult Save = MessageBox.Show("Would you like to save your game?", "Shutting Down", MessageBoxButtons.YesNoCancel);
                     if (Save == DialogResult.Yes)
                     {
-                        GameWorld.Save();
+                        GameWorld.Save(worldPath);
                         Application.Exit();
                     }
                     else if (Save == DialogResult.No)
@@ -433,7 +434,7 @@ namespace TextAndPizza
                 }
                 else if (s == "save")
                 {
-                    GameWorld.Save();
+                    GameWorld.Save(worldPath);
                     PrintMessage("Game saved!" + Environment.NewLine);
                 }
                 else if (s == "load")
@@ -463,19 +464,21 @@ namespace TextAndPizza
                 {
                     PrintMessage("That command is not understood!");
                 }
-            } else
+            }
+            else
             {
                 if (s == "load")
                 {
-                    GameWorld = World.Load();
-                    PrintMessage("Game loaded!" + Environment.NewLine);
-                    gameStarted = true;
-                    // Print the current room's string to orient the player with their new world
-                    PrintMessage(RoomString(GameWorld.CurrentRoom));
-                }
-                else if (s == "new game")
-                {
-                    //Make a new game in here
+                    if (LoadWorldDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string filePath = LoadWorldDialog.FileName;
+                        worldPath = filePath;
+                        GameWorld = World.Load(filePath);
+                        PrintMessage("Game loaded!" + Environment.NewLine);
+                        gameStarted = true;
+                        // Print the current room's string to orient the player with their new world
+                        PrintMessage(RoomString(GameWorld.CurrentRoom));
+                    }
                 }
                 else if (s == "worldbuild")
                 {
@@ -676,6 +679,11 @@ namespace TextAndPizza
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void LoadWorldDialog_FileOk(object sender, CancelEventArgs e)
         {
 
         }

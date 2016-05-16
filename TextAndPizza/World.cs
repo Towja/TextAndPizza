@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
 
 namespace TextAndPizza
 {
@@ -32,6 +33,10 @@ namespace TextAndPizza
         // Initializes the world
         // At the moment this just creates a hardcoded world
         //functionality will be added to load a world
+
+        //Make an openfile dialog for loading the world
+        public OpenFileDialog worldDialog = new OpenFileDialog();
+
         public World()
         {
             // Initalize player data
@@ -105,10 +110,10 @@ namespace TextAndPizza
         }
 
         // Saves the current world state to a file in the Users AppData
-        public void Save()
+        public void Save(String s)
         {
             // Filename that the file will be saved to
-            string fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+            string fileName = Environment.ExpandEnvironmentVariables(s);
 
             // Save the world
             Stream stream = null;
@@ -116,6 +121,8 @@ namespace TextAndPizza
             {
                 IFormatter formatter = new BinaryFormatter();
                 stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+
+                //This is broken!
                 formatter.Serialize(stream, this);
             }
             catch (Exception ex)
@@ -131,10 +138,11 @@ namespace TextAndPizza
             }
         }
 
-        public static World Load()
+        public static World Load(String path)
         {
             // Filename to load from
-            string fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+            //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+            String fileName = Environment.ExpandEnvironmentVariables(path);
 
             // Load the file
             Stream stream = null;

@@ -34,6 +34,7 @@
             this.InputButton = new System.Windows.Forms.Button();
             this.CompassBox = new System.Windows.Forms.PictureBox();
             this.CompassLabel = new System.Windows.Forms.Label();
+            this.LoadWorldDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.CompassBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,6 +99,10 @@
             this.CompassLabel.Text = "Compass";
             this.CompassLabel.Click += new System.EventHandler(this.label1_Click);
             // 
+            // LoadWorldDialog
+            // 
+            this.LoadWorldDialog.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,6 +132,7 @@
         private System.Windows.Forms.Button InputButton;
         private System.Windows.Forms.PictureBox CompassBox;
         private System.Windows.Forms.Label CompassLabel;
+        private System.Windows.Forms.OpenFileDialog LoadWorldDialog;
     }
 }
 
