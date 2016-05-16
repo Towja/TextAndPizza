@@ -474,10 +474,17 @@ namespace TextAndPizza
                         string filePath = LoadWorldDialog.FileName;
                         worldPath = filePath;
                         GameWorld = World.Load(filePath);
-                        PrintMessage("Game loaded!" + Environment.NewLine);
-                        gameStarted = true;
-                        // Print the current room's string to orient the player with their new world
-                        PrintMessage(RoomString(GameWorld.CurrentRoom));
+                        if (GameWorld != null)
+                        {
+                            PrintMessage("Game loaded!" + Environment.NewLine);
+                            gameStarted = true;
+                            // Print the current room's string to orient the player with their new world
+                            PrintMessage(RoomString(GameWorld.CurrentRoom));
+                        }
+                        else
+                        {
+                            //
+                        }
                     }
                 }
                 else if (s == "worldbuild")

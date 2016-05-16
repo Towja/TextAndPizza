@@ -117,6 +117,7 @@ namespace TextAndPizza
 
             // Save the world
             Stream stream = null;
+            MessageBox.Show(s);
             try
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -141,32 +142,41 @@ namespace TextAndPizza
         public static World Load(String path)
         {
             // Filename to load from
-            //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
             String fileName = Environment.ExpandEnvironmentVariables(path);
+            //Old Code: String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
 
-            // Load the file
-            Stream stream = null;
-            World savedWorld = null;
-            try
+            if (fileName.Contains(".bin"))
             {
-                IFormatter formatter = new BinaryFormatter();
-                stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
-                savedWorld = (World)formatter.Deserialize(stream);
-            }
-            catch
-            {
-                // Ignore all errors
-                // TODO: Handle having no save file
-            }
-            finally
-            {
-                // Close the file
-                if(null != stream)
-                    stream.Close();
-            }
+                // Load the file
+                Stream stream = null;
+                World savedWorld = null;
+                try
+                {
+                    IFormatter formatter = new BinaryFormatter();
+                    stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                    // This is also very broken
+                    savedWorld = (World)formatter.Deserialize(stream);
+                }
+                catch
+                {
+                    // Ignore all errors
+                    // TODO: Handle having no save file
+                }
+                finally
+                {
+                    // Close the file
+                    if (null != stream)
+                        stream.Close();
+                }
 
-            // Return the loaded world object
-            return savedWorld;
+                // Return the loaded world object
+                return savedWorld;
+            }
+            else
+            {
+                MessageBox.Show("There was a problem with your world. Please ensure it is a \".bin\" file");
+                return null;
+            } 
         }
     }
 }
