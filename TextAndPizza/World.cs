@@ -21,14 +21,11 @@ namespace TextAndPizza
         public int Balance = 0;
         public Room CurrentRoom { get; set; }
         public int Direction;
+        Dictionary<string, Room> worldRooms = new Dictionary<string, Room>();
 
         // Data related to the rooms and layout of the world
         // TODO: Make this just an array of rooms to allow things such as loading a different level
         // and procedural generation?
-        public Room DungeonRoomC;
-        Room DungeonRoomN;
-        Room DungeonRoomE;
-        Room DungeonRoomExit;
 
         // Initializes the world
         // At the moment this just creates a hardcoded world
@@ -48,22 +45,31 @@ namespace TextAndPizza
             Balance = 0;
 
             // Initalize Rooms
-            InitalizeRooms();
-            CurrentRoom = DungeonRoomC;
+            //InitalizeRooms();
+            //CurrentRoom = DungeonRoomC;
         }
 
 
         //Add rooms through this (For the world builder)
         public void AddRoom(String id, String name, String description, List<Item> items, List<Entity> entities, Room nExit, Room sExit, Room eExit, Room wExit)
         {
-            //
+            Room room = new Room(name, description);
+            room.setItems(items);
+            room.setEntities(entities);
+            //Might change to coordinate system, may be a LOT easier...
+            room.setNorthExit(nExit);
+            worldRooms.Add(id, room);
         }
 
         // Initalizes the rooms
         // TODO: Make this more generic
         public void InitalizeRooms()
         {
-            //DungeonRoomC
+
+
+
+
+            /*//DungeonRoomC
             DungeonRoomC = new Room("Dungeon Room",
                 "a cold stony dungeon room, lit by some torches on the walls, which provide almost no heat.");
             Item Sword1 = new Item("Iron Sword",
@@ -107,7 +113,7 @@ namespace TextAndPizza
             DungeonRoomC.setEastExit(DungeonRoomE);
             DungeonRoomE.setWestExit(DungeonRoomC);
             DungeonRoomExit.setSouthExit(DungeonRoomN);
-            DungeonRoomN.setNorthExit(DungeonRoomExit);
+            DungeonRoomN.setNorthExit(DungeonRoomExit);*/
         }
 
         // Saves the current world state to a file in the Users AppData
