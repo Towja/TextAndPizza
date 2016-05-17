@@ -110,14 +110,14 @@ namespace TextAndPizza
         }
 
         // Saves the current world state to a file in the Users AppData
-        public void Save(String s)
+        public void Save(String path)
         {
             // Filename that the file will be saved to
-            string fileName = Environment.ExpandEnvironmentVariables(s);
+            string fileName = Environment.ExpandEnvironmentVariables(path);
 
             // Save the world
             Stream stream = null;
-            MessageBox.Show(s);
+            MessageBox.Show(path);
             try
             {
                 IFormatter formatter = new BinaryFormatter();
@@ -143,7 +143,7 @@ namespace TextAndPizza
         {
             // Filename to load from
             String fileName = Environment.ExpandEnvironmentVariables(path);
-            //Old Code: String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
+            //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
 
             if (fileName.Contains(".bin"))
             {

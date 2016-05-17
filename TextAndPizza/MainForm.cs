@@ -27,6 +27,7 @@ namespace TextAndPizza
         World GameWorld;
         MainForm mainForm;
         public String worldPath;
+        
 
         public MainForm()
         {
@@ -39,7 +40,8 @@ namespace TextAndPizza
             ChatLogNum = ChatLog.Count();
             // Initalize the world
             GameWorld = new World();
-            //PrintMessage(RoomString(GameWorld.CurrentRoom));
+            //PrintMessage(RoomString(GameWorld.CurrentRoom))
+            MessageBox.Show("In the world class line 127 and line 158 are broken, check them out.");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
