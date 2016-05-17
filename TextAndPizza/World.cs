@@ -35,6 +35,7 @@ namespace TextAndPizza
         //functionality will be added to load a world
 
         //Make an openfile dialog for loading the world
+        [NonSerialized()]
         public OpenFileDialog worldDialog = new OpenFileDialog();
 
         public World()
