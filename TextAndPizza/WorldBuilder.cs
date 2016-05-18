@@ -70,6 +70,7 @@ namespace TextAndPizza
                 StartingRoomCombo.SelectedValue = selectedRoom;
             }
             //Manage the items pane
+            selectedItem = null;
             ItemTreeView.Nodes.Clear();
             ItemName.Text = "";
             ItemDescription.Text = "";
@@ -216,6 +217,8 @@ namespace TextAndPizza
             if (OpenWorldDialog.ShowDialog() == DialogResult.OK)
             {
                 showAll();
+                openWorldToolStripMenuItem.Enabled = false;
+                newWorldToolStripMenuItem.Enabled = false;
                 string worldPath = OpenWorldDialog.FileName;
                 WorldBuild = World.Load(worldPath);
                 foreach (KeyValuePair<String, Room> entry in WorldBuild.worldRooms)
@@ -319,12 +322,18 @@ namespace TextAndPizza
 
         private void ItemName_TextChanged(object sender, EventArgs e)
         {
-            selectedRoom.changeItemName(selectedItem.Text, ItemName.Text);
+            if (selectedItem != null)
+            {
+                selectedRoom.changeItemName(selectedItem.Text, ItemName.Text);
+            }
         }
 
         private void ItemDescription_TextChanged(object sender, EventArgs e)
         {
-            selectedRoom.changeItemDescription(selectedItem.Text, ItemDescription.Text);
+            if (selectedItem != null)
+            {
+                selectedRoom.changeItemDescription(selectedItem.Text, ItemDescription.Text);
+            }
         }
 
         private void ItemTreeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -344,12 +353,18 @@ namespace TextAndPizza
 
         private void ItemStrength_TextChanged(object sender, EventArgs e)
         {
-            selectedRoom.changeItemStrength(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+            if (selectedItem != null)
+            {
+                selectedRoom.changeItemStrength(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+            }
         }
 
         private void ItemDefence_TextChanged(object sender, EventArgs e)
         {
-            selectedRoom.changeItemDefence(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+            if (selectedItem != null)
+            {
+                selectedRoom.changeItemDefence(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+            }
         }
 
         private void DefenceMinusButton_Click(object sender, EventArgs e)

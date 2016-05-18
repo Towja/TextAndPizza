@@ -35,8 +35,11 @@ namespace TextAndPizza
 
         public void changeItemName(String id, String name)
         {
-            Item[id].setName(name);
-            Items = getItems();
+            if (id != null)
+            {
+                Item[id].setName(name);
+                Items = getItems();
+            }
         }
 
         public void changeItemDescription(String id, String description)
