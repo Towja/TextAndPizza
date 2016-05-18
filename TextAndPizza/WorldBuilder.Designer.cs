@@ -32,20 +32,26 @@
             this.worldTreeView = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.saveWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RoomId = new System.Windows.Forms.ToolStripTextBox();
+            this.addRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.itemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ItemId = new System.Windows.Forms.ToolStripTextBox();
+            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EntityId = new System.Windows.Forms.ToolStripTextBox();
+            this.addEntityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RoomName = new System.Windows.Forms.TextBox();
             this.RoomNameLabel = new System.Windows.Forms.Label();
             this.RoomDescription = new System.Windows.Forms.TextBox();
             this.RoomDescriptionLabel = new System.Windows.Forms.Label();
             this.WorldName = new System.Windows.Forms.TextBox();
             this.WorldNameLabel = new System.Windows.Forms.Label();
-            this.RoomId = new System.Windows.Forms.ToolStripTextBox();
-            this.addRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NorthExitCombo = new System.Windows.Forms.ComboBox();
             this.OpenWorldDialog = new System.Windows.Forms.OpenFileDialog();
             this.EastExitCombo = new System.Windows.Forms.ComboBox();
@@ -55,12 +61,8 @@
             this.EastExitLabel = new System.Windows.Forms.Label();
             this.SouthExitLabel = new System.Windows.Forms.Label();
             this.WestExitLabel = new System.Windows.Forms.Label();
-            this.ItemId = new System.Windows.Forms.ToolStripTextBox();
-            this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EntityId = new System.Windows.Forms.ToolStripTextBox();
-            this.addEntityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.newWorldToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StartingRoomLabel = new System.Windows.Forms.Label();
+            this.StartingRoomCombo = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             // 
             this.worldTreeView.Location = new System.Drawing.Point(12, 28);
             this.worldTreeView.Name = "worldTreeView";
-            this.worldTreeView.Size = new System.Drawing.Size(178, 359);
+            this.worldTreeView.Size = new System.Drawing.Size(178, 333);
             this.worldTreeView.TabIndex = 0;
             this.worldTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.worldTreeView_AfterSelect);
             // 
@@ -95,17 +97,29 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // newWorldToolStripMenuItem
+            // 
+            this.newWorldToolStripMenuItem.Name = "newWorldToolStripMenuItem";
+            this.newWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.newWorldToolStripMenuItem.Text = "New World";
+            this.newWorldToolStripMenuItem.Click += new System.EventHandler(this.newWorldToolStripMenuItem_Click);
+            // 
             // openWorldToolStripMenuItem
             // 
             this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
-            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.openWorldToolStripMenuItem.Text = "Open World...";
             this.openWorldToolStripMenuItem.Click += new System.EventHandler(this.openWorldToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
             // 
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.saveWorldToolStripMenuItem.Text = "Save World...";
             this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
@@ -126,9 +140,23 @@
             this.RoomId,
             this.addRoomToolStripMenuItem});
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.roomToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.roomToolStripMenuItem.Text = "Room";
             this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
+            // 
+            // RoomId
+            // 
+            this.RoomId.Name = "RoomId";
+            this.RoomId.Size = new System.Drawing.Size(100, 23);
+            this.RoomId.Text = "RoomID";
+            this.RoomId.Click += new System.EventHandler(this.RoomId_Click);
+            // 
+            // addRoomToolStripMenuItem
+            // 
+            this.addRoomToolStripMenuItem.Name = "addRoomToolStripMenuItem";
+            this.addRoomToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.addRoomToolStripMenuItem.Text = "Add Room";
+            this.addRoomToolStripMenuItem.Click += new System.EventHandler(this.addRoomToolStripMenuItem_Click);
             // 
             // itemToolStripMenuItem
             // 
@@ -136,9 +164,22 @@
             this.ItemId,
             this.addItemToolStripMenuItem});
             this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.itemToolStripMenuItem.Text = "Item";
             this.itemToolStripMenuItem.Click += new System.EventHandler(this.itemToolStripMenuItem_Click);
+            // 
+            // ItemId
+            // 
+            this.ItemId.Name = "ItemId";
+            this.ItemId.Size = new System.Drawing.Size(100, 23);
+            this.ItemId.Text = "ItemID";
+            this.ItemId.Click += new System.EventHandler(this.toolStripTextBox1_Click);
+            // 
+            // addItemToolStripMenuItem
+            // 
+            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.addItemToolStripMenuItem.Text = "Add Item";
             // 
             // entityToolStripMenuItem
             // 
@@ -146,8 +187,20 @@
             this.EntityId,
             this.addEntityToolStripMenuItem});
             this.entityToolStripMenuItem.Name = "entityToolStripMenuItem";
-            this.entityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.entityToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.entityToolStripMenuItem.Text = "Entity";
+            // 
+            // EntityId
+            // 
+            this.EntityId.Name = "EntityId";
+            this.EntityId.Size = new System.Drawing.Size(100, 23);
+            this.EntityId.Text = "EntityID";
+            // 
+            // addEntityToolStripMenuItem
+            // 
+            this.addEntityToolStripMenuItem.Name = "addEntityToolStripMenuItem";
+            this.addEntityToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.addEntityToolStripMenuItem.Text = "Add Entity";
             // 
             // RoomName
             // 
@@ -201,20 +254,6 @@
             this.WorldNameLabel.TabIndex = 10;
             this.WorldNameLabel.Text = "World Name:";
             // 
-            // RoomId
-            // 
-            this.RoomId.Name = "RoomId";
-            this.RoomId.Size = new System.Drawing.Size(100, 23);
-            this.RoomId.Text = "RoomID";
-            this.RoomId.Click += new System.EventHandler(this.RoomId_Click);
-            // 
-            // addRoomToolStripMenuItem
-            // 
-            this.addRoomToolStripMenuItem.Name = "addRoomToolStripMenuItem";
-            this.addRoomToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.addRoomToolStripMenuItem.Text = "Add Room";
-            this.addRoomToolStripMenuItem.Click += new System.EventHandler(this.addRoomToolStripMenuItem_Click);
-            // 
             // NorthExitCombo
             // 
             this.NorthExitCombo.FormattingEnabled = true;
@@ -236,6 +275,7 @@
             this.EastExitCombo.Name = "EastExitCombo";
             this.EastExitCombo.Size = new System.Drawing.Size(121, 21);
             this.EastExitCombo.TabIndex = 12;
+            this.EastExitCombo.SelectedIndexChanged += new System.EventHandler(this.EastExitCombo_SelectedIndexChanged);
             // 
             // SouthExitCombo
             // 
@@ -244,6 +284,7 @@
             this.SouthExitCombo.Name = "SouthExitCombo";
             this.SouthExitCombo.Size = new System.Drawing.Size(121, 21);
             this.SouthExitCombo.TabIndex = 13;
+            this.SouthExitCombo.SelectedIndexChanged += new System.EventHandler(this.SouthExitCombo_SelectedIndexChanged);
             // 
             // WestExitCombo
             // 
@@ -252,6 +293,7 @@
             this.WestExitCombo.Name = "WestExitCombo";
             this.WestExitCombo.Size = new System.Drawing.Size(121, 21);
             this.WestExitCombo.TabIndex = 14;
+            this.WestExitCombo.SelectedIndexChanged += new System.EventHandler(this.WestExitCombo_SelectedIndexChanged);
             // 
             // NorthExitLabel
             // 
@@ -289,48 +331,30 @@
             this.WestExitLabel.TabIndex = 18;
             this.WestExitLabel.Text = "West Exit:";
             // 
-            // ItemId
+            // StartingRoomLabel
             // 
-            this.ItemId.Name = "ItemId";
-            this.ItemId.Size = new System.Drawing.Size(100, 23);
-            this.ItemId.Text = "ItemID";
-            this.ItemId.Click += new System.EventHandler(this.toolStripTextBox1_Click);
+            this.StartingRoomLabel.AutoSize = true;
+            this.StartingRoomLabel.Location = new System.Drawing.Point(9, 373);
+            this.StartingRoomLabel.Name = "StartingRoomLabel";
+            this.StartingRoomLabel.Size = new System.Drawing.Size(77, 13);
+            this.StartingRoomLabel.TabIndex = 19;
+            this.StartingRoomLabel.Text = "Starting Room:";
             // 
-            // addItemToolStripMenuItem
+            // StartingRoomCombo
             // 
-            this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.addItemToolStripMenuItem.Text = "Add Item";
-            // 
-            // EntityId
-            // 
-            this.EntityId.Name = "EntityId";
-            this.EntityId.Size = new System.Drawing.Size(100, 23);
-            this.EntityId.Text = "EntityID";
-            // 
-            // addEntityToolStripMenuItem
-            // 
-            this.addEntityToolStripMenuItem.Name = "addEntityToolStripMenuItem";
-            this.addEntityToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.addEntityToolStripMenuItem.Text = "Add Entity";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // newWorldToolStripMenuItem
-            // 
-            this.newWorldToolStripMenuItem.Name = "newWorldToolStripMenuItem";
-            this.newWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newWorldToolStripMenuItem.Text = "New World";
-            this.newWorldToolStripMenuItem.Click += new System.EventHandler(this.newWorldToolStripMenuItem_Click);
+            this.StartingRoomCombo.FormattingEnabled = true;
+            this.StartingRoomCombo.Location = new System.Drawing.Point(92, 367);
+            this.StartingRoomCombo.Name = "StartingRoomCombo";
+            this.StartingRoomCombo.Size = new System.Drawing.Size(98, 21);
+            this.StartingRoomCombo.TabIndex = 20;
             // 
             // WorldBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 422);
+            this.Controls.Add(this.StartingRoomCombo);
+            this.Controls.Add(this.StartingRoomLabel);
             this.Controls.Add(this.WestExitLabel);
             this.Controls.Add(this.SouthExitLabel);
             this.Controls.Add(this.EastExitLabel);
@@ -393,5 +417,7 @@
         private System.Windows.Forms.ToolStripMenuItem addEntityToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newWorldToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Label StartingRoomLabel;
+        private System.Windows.Forms.ComboBox StartingRoomCombo;
     }
 }

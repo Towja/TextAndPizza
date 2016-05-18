@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TextAndPizza.Properties;
-
+using System.IO;
 namespace TextAndPizza
 {
     public partial class MainForm : Form
@@ -41,6 +41,10 @@ namespace TextAndPizza
             // Initalize the world
             GameWorld = new World();
             //PrintMessage(RoomString(GameWorld.CurrentRoom))
+            //Create the appdata folder.
+            var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var TAP = Path.Combine(appdata, @"\TextAndPizza");
+            Directory.CreateDirectory(TAP);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -48,6 +52,11 @@ namespace TextAndPizza
 
         }
 
+        public void CreateFolder(String Fname)
+        {
+            var TAP = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"\TextAndPizza");
+            Directory.CreateDirectory(Path.Combine(TAP, @"\" + Fname));
+        }
 
         public void EnterRoom(Room r)
         {
@@ -442,6 +451,10 @@ namespace TextAndPizza
                 {
                     PrintMessage("You have already started a game!");
                 }
+                else if (s == "more worlds" || s == "download worlds")
+                {
+                    PrintMessage("Download more worlds here: " + Environment.NewLine + "https://drive.google.com/folderview?id=0B-3zMtsP_y-9TjVXYTMtUHV4R0U&usp=sharing");
+                }
                 else if (s == "help")
                 {
                     PrintMessage("==Help==" + Environment.NewLine
@@ -459,6 +472,7 @@ namespace TextAndPizza
                         + "- quit: Leave the game" + Environment.NewLine
                         + "- save: Saves the game" + Environment.NewLine
                         + "- load: Loads a saved game" + Environment.NewLine
+                        + "- more worlds: A link to a place to download more worlds" + Environment.NewLine
                         );
                 }
                 else

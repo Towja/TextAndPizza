@@ -135,8 +135,6 @@ namespace TextAndPizza
             {
                 IFormatter formatter = new BinaryFormatter();
                 stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
-
-                //This is broken!
                 formatter.Serialize(stream, this);
             }
             catch (Exception ex)

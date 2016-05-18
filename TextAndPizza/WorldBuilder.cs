@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace TextAndPizza
 {
@@ -28,10 +29,28 @@ namespace TextAndPizza
             RoomName.Text = WorldBuild.worldRooms[selected.Text].Name;
             RoomDescription.Text = WorldBuild.worldRooms[selected.Text].Description;
             //Load the data for the combo boxes
+            //North
             NorthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
             NorthExitCombo.DisplayMember = "Key";
             NorthExitCombo.ValueMember = "Value";
-
+            //East
+            EastExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            EastExitCombo.DisplayMember = "Key";
+            EastExitCombo.ValueMember = "Value";
+            //South
+            SouthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            SouthExitCombo.DisplayMember = "Key";
+            SouthExitCombo.ValueMember = "Value";
+            //West
+            WestExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            WestExitCombo.DisplayMember = "Key";
+            WestExitCombo.ValueMember = "Value";
+            //BeginningRoom
+            StartingRoomCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            StartingRoomCombo.DisplayMember = "Key";
+            StartingRoomCombo.ValueMember = "Value";
+            //Set combo box values
+            StartingRoomCombo.SelectedValue = WorldBuild.CurrentRoom;
         }
 
         private void makeUneditable()
@@ -57,6 +76,8 @@ namespace TextAndPizza
             SouthExitCombo.Visible = false;
             WestExitLabel.Visible = false;
             WestExitCombo.Visible = false;
+            StartingRoomLabel.Visible = false;
+            StartingRoomCombo.Visible = false;
         }
 
         private void showAll()
@@ -76,6 +97,11 @@ namespace TextAndPizza
             SouthExitCombo.Visible = true;
             WestExitLabel.Visible = true;
             WestExitCombo.Visible = true;
+            StartingRoomLabel.Visible = true;
+            StartingRoomCombo.Visible = true;
+
+
+
         }
 
         private void makeEditable()
@@ -119,7 +145,7 @@ namespace TextAndPizza
 
         private void saveWorldToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WorldBuild.setStartRoom(selected.Text);
+            WorldBuild.setStartRoom(StartingRoomCombo.Text);
             WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapwf");
         }
 
@@ -149,18 +175,6 @@ namespace TextAndPizza
             if (selected != null)
             {
                 WorldBuild.worldRooms[selected.Text].setDescription(RoomDescription.Text);
-            }
-        }
-
-        private void NorthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (NorthExitCombo.Text == selected.Text)
-            {
-                //MessageBox.Show("Ping");
-            } else
-            {
-                //MessageBox.Show(selected.Text);
-                //WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[NorthExitCombo.Text]);
             }
         }
 
@@ -201,6 +215,54 @@ namespace TextAndPizza
         private void newWorldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             showAll();
+        }
+
+        private void NorthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NorthExitCombo.Text == selected.Text)
+            {
+                WorldBuild.worldRooms[selected.Text].setNorthExit(null);
+            }
+            else
+            {
+                WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[NorthExitCombo.Text]);
+            }
+        }
+
+        private void EastExitCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (EastExitCombo.Text == selected.Text)
+            {
+                WorldBuild.worldRooms[selected.Text].setEastExit(null);
+            }
+            else
+            {
+                WorldBuild.worldRooms[selected.Text].setEastExit(WorldBuild.worldRooms[EastExitCombo.Text]);
+            }
+        }
+
+        private void SouthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SouthExitCombo.Text == selected.Text)
+            {
+                WorldBuild.worldRooms[selected.Text].setSouthExit(null);
+            }
+            else
+            {
+                WorldBuild.worldRooms[selected.Text].setSouthExit(WorldBuild.worldRooms[SouthExitCombo.Text]);
+            }
+        }
+
+        private void WestExitCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (WestExitCombo.Text == selected.Text)
+            {
+                WorldBuild.worldRooms[selected.Text].setWestExit(null);
+            }
+            else
+            {
+                WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[WestExitCombo.Text]);
+            }
         }
     }
 }
