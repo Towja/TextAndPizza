@@ -63,7 +63,25 @@
             this.WestExitLabel = new System.Windows.Forms.Label();
             this.StartingRoomLabel = new System.Windows.Forms.Label();
             this.StartingRoomCombo = new System.Windows.Forms.ComboBox();
+            this.ItemEntityTabs = new System.Windows.Forms.TabControl();
+            this.ItemTab = new System.Windows.Forms.TabPage();
+            this.DefenceMinusButton = new System.Windows.Forms.Button();
+            this.DefencePlusButton = new System.Windows.Forms.Button();
+            this.StrengthMinusButton = new System.Windows.Forms.Button();
+            this.StrengthPlusButton = new System.Windows.Forms.Button();
+            this.ItemDefenceLabel = new System.Windows.Forms.Label();
+            this.ItemStrengthLabel = new System.Windows.Forms.Label();
+            this.ItemDescriptionLabel = new System.Windows.Forms.Label();
+            this.ItemNameLabel = new System.Windows.Forms.Label();
+            this.ItemDefence = new System.Windows.Forms.TextBox();
+            this.ItemStrength = new System.Windows.Forms.TextBox();
+            this.ItemDescription = new System.Windows.Forms.TextBox();
+            this.ItemName = new System.Windows.Forms.TextBox();
+            this.ItemTreeView = new System.Windows.Forms.TreeView();
+            this.EntityTab = new System.Windows.Forms.TabPage();
             this.menuStrip1.SuspendLayout();
+            this.ItemEntityTabs.SuspendLayout();
+            this.ItemTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // worldTreeView
@@ -100,26 +118,26 @@
             // newWorldToolStripMenuItem
             // 
             this.newWorldToolStripMenuItem.Name = "newWorldToolStripMenuItem";
-            this.newWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.newWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newWorldToolStripMenuItem.Text = "New World";
             this.newWorldToolStripMenuItem.Click += new System.EventHandler(this.newWorldToolStripMenuItem_Click);
             // 
             // openWorldToolStripMenuItem
             // 
             this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
-            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openWorldToolStripMenuItem.Text = "Open World...";
             this.openWorldToolStripMenuItem.Click += new System.EventHandler(this.openWorldToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(144, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveWorldToolStripMenuItem.Text = "Save World...";
             this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
@@ -140,7 +158,7 @@
             this.RoomId,
             this.addRoomToolStripMenuItem});
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.roomToolStripMenuItem.Text = "Room";
             this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
             // 
@@ -164,7 +182,7 @@
             this.ItemId,
             this.addItemToolStripMenuItem});
             this.itemToolStripMenuItem.Name = "itemToolStripMenuItem";
-            this.itemToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.itemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.itemToolStripMenuItem.Text = "Item";
             this.itemToolStripMenuItem.Click += new System.EventHandler(this.itemToolStripMenuItem_Click);
             // 
@@ -173,13 +191,14 @@
             this.ItemId.Name = "ItemId";
             this.ItemId.Size = new System.Drawing.Size(100, 23);
             this.ItemId.Text = "ItemID";
-            this.ItemId.Click += new System.EventHandler(this.toolStripTextBox1_Click);
+            this.ItemId.Click += new System.EventHandler(this.toolStripItemId_Click);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
             this.addItemToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.addItemToolStripMenuItem.Text = "Add Item";
+            this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // entityToolStripMenuItem
             // 
@@ -187,7 +206,7 @@
             this.EntityId,
             this.addEntityToolStripMenuItem});
             this.entityToolStripMenuItem.Name = "entityToolStripMenuItem";
-            this.entityToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.entityToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.entityToolStripMenuItem.Text = "Entity";
             // 
             // EntityId
@@ -348,11 +367,180 @@
             this.StartingRoomCombo.Size = new System.Drawing.Size(98, 21);
             this.StartingRoomCombo.TabIndex = 20;
             // 
+            // ItemEntityTabs
+            // 
+            this.ItemEntityTabs.Controls.Add(this.ItemTab);
+            this.ItemEntityTabs.Controls.Add(this.EntityTab);
+            this.ItemEntityTabs.Location = new System.Drawing.Point(398, 127);
+            this.ItemEntityTabs.Name = "ItemEntityTabs";
+            this.ItemEntityTabs.SelectedIndex = 0;
+            this.ItemEntityTabs.Size = new System.Drawing.Size(308, 283);
+            this.ItemEntityTabs.TabIndex = 21;
+            // 
+            // ItemTab
+            // 
+            this.ItemTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ItemTab.Controls.Add(this.DefenceMinusButton);
+            this.ItemTab.Controls.Add(this.DefencePlusButton);
+            this.ItemTab.Controls.Add(this.StrengthMinusButton);
+            this.ItemTab.Controls.Add(this.StrengthPlusButton);
+            this.ItemTab.Controls.Add(this.ItemDefenceLabel);
+            this.ItemTab.Controls.Add(this.ItemStrengthLabel);
+            this.ItemTab.Controls.Add(this.ItemDescriptionLabel);
+            this.ItemTab.Controls.Add(this.ItemNameLabel);
+            this.ItemTab.Controls.Add(this.ItemDefence);
+            this.ItemTab.Controls.Add(this.ItemStrength);
+            this.ItemTab.Controls.Add(this.ItemDescription);
+            this.ItemTab.Controls.Add(this.ItemName);
+            this.ItemTab.Controls.Add(this.ItemTreeView);
+            this.ItemTab.Location = new System.Drawing.Point(4, 22);
+            this.ItemTab.Name = "ItemTab";
+            this.ItemTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ItemTab.Size = new System.Drawing.Size(300, 257);
+            this.ItemTab.TabIndex = 0;
+            this.ItemTab.Text = "Items";
+            this.ItemTab.Click += new System.EventHandler(this.ItemTab_Click);
+            // 
+            // DefenceMinusButton
+            // 
+            this.DefenceMinusButton.Location = new System.Drawing.Point(181, 99);
+            this.DefenceMinusButton.Name = "DefenceMinusButton";
+            this.DefenceMinusButton.Size = new System.Drawing.Size(17, 20);
+            this.DefenceMinusButton.TabIndex = 32;
+            this.DefenceMinusButton.Text = "-";
+            this.DefenceMinusButton.UseVisualStyleBackColor = true;
+            this.DefenceMinusButton.Click += new System.EventHandler(this.DefenceMinusButton_Click);
+            // 
+            // DefencePlusButton
+            // 
+            this.DefencePlusButton.Location = new System.Drawing.Point(233, 99);
+            this.DefencePlusButton.Name = "DefencePlusButton";
+            this.DefencePlusButton.Size = new System.Drawing.Size(17, 20);
+            this.DefencePlusButton.TabIndex = 31;
+            this.DefencePlusButton.Text = "+";
+            this.DefencePlusButton.UseVisualStyleBackColor = true;
+            this.DefencePlusButton.Click += new System.EventHandler(this.DefencePlusButton_Click);
+            // 
+            // StrengthMinusButton
+            // 
+            this.StrengthMinusButton.Location = new System.Drawing.Point(100, 99);
+            this.StrengthMinusButton.Name = "StrengthMinusButton";
+            this.StrengthMinusButton.Size = new System.Drawing.Size(17, 20);
+            this.StrengthMinusButton.TabIndex = 30;
+            this.StrengthMinusButton.Text = "-";
+            this.StrengthMinusButton.UseVisualStyleBackColor = true;
+            this.StrengthMinusButton.Click += new System.EventHandler(this.StrengthMinusButton_Click);
+            // 
+            // StrengthPlusButton
+            // 
+            this.StrengthPlusButton.Location = new System.Drawing.Point(152, 99);
+            this.StrengthPlusButton.Name = "StrengthPlusButton";
+            this.StrengthPlusButton.Size = new System.Drawing.Size(17, 20);
+            this.StrengthPlusButton.TabIndex = 29;
+            this.StrengthPlusButton.Text = "+";
+            this.StrengthPlusButton.UseVisualStyleBackColor = true;
+            this.StrengthPlusButton.Click += new System.EventHandler(this.StrengthPlusButton_Click);
+            // 
+            // ItemDefenceLabel
+            // 
+            this.ItemDefenceLabel.AutoSize = true;
+            this.ItemDefenceLabel.Location = new System.Drawing.Point(195, 83);
+            this.ItemDefenceLabel.Name = "ItemDefenceLabel";
+            this.ItemDefenceLabel.Size = new System.Drawing.Size(51, 13);
+            this.ItemDefenceLabel.TabIndex = 28;
+            this.ItemDefenceLabel.Text = "Defence:";
+            // 
+            // ItemStrengthLabel
+            // 
+            this.ItemStrengthLabel.AutoSize = true;
+            this.ItemStrengthLabel.Location = new System.Drawing.Point(112, 83);
+            this.ItemStrengthLabel.Name = "ItemStrengthLabel";
+            this.ItemStrengthLabel.Size = new System.Drawing.Size(50, 13);
+            this.ItemStrengthLabel.TabIndex = 27;
+            this.ItemStrengthLabel.Text = "Strength:";
+            // 
+            // ItemDescriptionLabel
+            // 
+            this.ItemDescriptionLabel.AutoSize = true;
+            this.ItemDescriptionLabel.Location = new System.Drawing.Point(100, 32);
+            this.ItemDescriptionLabel.Name = "ItemDescriptionLabel";
+            this.ItemDescriptionLabel.Size = new System.Drawing.Size(63, 13);
+            this.ItemDescriptionLabel.TabIndex = 26;
+            this.ItemDescriptionLabel.Text = "Description:";
+            // 
+            // ItemNameLabel
+            // 
+            this.ItemNameLabel.AutoSize = true;
+            this.ItemNameLabel.Location = new System.Drawing.Point(100, 8);
+            this.ItemNameLabel.Name = "ItemNameLabel";
+            this.ItemNameLabel.Size = new System.Drawing.Size(38, 13);
+            this.ItemNameLabel.TabIndex = 25;
+            this.ItemNameLabel.Text = "Name:";
+            // 
+            // ItemDefence
+            // 
+            this.ItemDefence.Location = new System.Drawing.Point(198, 99);
+            this.ItemDefence.Name = "ItemDefence";
+            this.ItemDefence.ReadOnly = true;
+            this.ItemDefence.Size = new System.Drawing.Size(35, 20);
+            this.ItemDefence.TabIndex = 24;
+            this.ItemDefence.Text = "0";
+            this.ItemDefence.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ItemDefence.TextChanged += new System.EventHandler(this.ItemDefence_TextChanged);
+            // 
+            // ItemStrength
+            // 
+            this.ItemStrength.Location = new System.Drawing.Point(117, 99);
+            this.ItemStrength.Name = "ItemStrength";
+            this.ItemStrength.ReadOnly = true;
+            this.ItemStrength.Size = new System.Drawing.Size(35, 20);
+            this.ItemStrength.TabIndex = 23;
+            this.ItemStrength.Text = "0";
+            this.ItemStrength.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ItemStrength.TextChanged += new System.EventHandler(this.ItemStrength_TextChanged);
+            // 
+            // ItemDescription
+            // 
+            this.ItemDescription.Location = new System.Drawing.Point(171, 32);
+            this.ItemDescription.Multiline = true;
+            this.ItemDescription.Name = "ItemDescription";
+            this.ItemDescription.Size = new System.Drawing.Size(123, 48);
+            this.ItemDescription.TabIndex = 22;
+            this.ItemDescription.TextChanged += new System.EventHandler(this.ItemDescription_TextChanged);
+            // 
+            // ItemName
+            // 
+            this.ItemName.Location = new System.Drawing.Point(171, 6);
+            this.ItemName.Name = "ItemName";
+            this.ItemName.Size = new System.Drawing.Size(123, 20);
+            this.ItemName.TabIndex = 22;
+            this.ItemName.TextChanged += new System.EventHandler(this.ItemName_TextChanged);
+            // 
+            // ItemTreeView
+            // 
+            this.ItemTreeView.Location = new System.Drawing.Point(3, 5);
+            this.ItemTreeView.Name = "ItemTreeView";
+            this.ItemTreeView.Size = new System.Drawing.Size(91, 246);
+            this.ItemTreeView.TabIndex = 0;
+            this.ItemTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ItemTreeView_AfterSelect);
+            // 
+            // EntityTab
+            // 
+            this.EntityTab.Location = new System.Drawing.Point(4, 22);
+            this.EntityTab.Name = "EntityTab";
+            this.EntityTab.Padding = new System.Windows.Forms.Padding(3);
+            this.EntityTab.Size = new System.Drawing.Size(300, 257);
+            this.EntityTab.TabIndex = 1;
+            this.EntityTab.Text = "Entities";
+            this.EntityTab.UseVisualStyleBackColor = true;
+            this.EntityTab.Click += new System.EventHandler(this.EntityTab_Click);
+            // 
             // WorldBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 422);
+            this.Controls.Add(this.ItemEntityTabs);
             this.Controls.Add(this.StartingRoomCombo);
             this.Controls.Add(this.StartingRoomLabel);
             this.Controls.Add(this.WestExitLabel);
@@ -378,6 +566,9 @@
             this.Load += new System.EventHandler(this.WorldBuilder_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.ItemEntityTabs.ResumeLayout(false);
+            this.ItemTab.ResumeLayout(false);
+            this.ItemTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,5 +610,21 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label StartingRoomLabel;
         private System.Windows.Forms.ComboBox StartingRoomCombo;
+        private System.Windows.Forms.TabControl ItemEntityTabs;
+        private System.Windows.Forms.TabPage ItemTab;
+        private System.Windows.Forms.TabPage EntityTab;
+        private System.Windows.Forms.TextBox ItemDescription;
+        private System.Windows.Forms.TextBox ItemName;
+        private System.Windows.Forms.TreeView ItemTreeView;
+        private System.Windows.Forms.Button DefencePlusButton;
+        private System.Windows.Forms.Button StrengthMinusButton;
+        private System.Windows.Forms.Button StrengthPlusButton;
+        private System.Windows.Forms.Label ItemDefenceLabel;
+        private System.Windows.Forms.Label ItemStrengthLabel;
+        private System.Windows.Forms.Label ItemDescriptionLabel;
+        private System.Windows.Forms.Label ItemNameLabel;
+        private System.Windows.Forms.TextBox ItemDefence;
+        private System.Windows.Forms.TextBox ItemStrength;
+        private System.Windows.Forms.Button DefenceMinusButton;
     }
 }

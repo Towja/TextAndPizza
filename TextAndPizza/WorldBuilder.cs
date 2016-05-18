@@ -14,7 +14,10 @@ namespace TextAndPizza
     public partial class WorldBuilder : Form
     {
         public TreeNode selected;
+        public TreeNode selectedItem;
+        public TreeNode selectedEntity;
         World WorldBuild;
+        Room selectedRoom;
 
         public WorldBuilder()
         {
@@ -26,6 +29,7 @@ namespace TextAndPizza
         private void worldTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             selected = worldTreeView.SelectedNode;
+            selectedRoom = WorldBuild.worldRooms[selected.Text];
             RoomName.Text = WorldBuild.worldRooms[selected.Text].Name;
             RoomDescription.Text = WorldBuild.worldRooms[selected.Text].Description;
             //Load the data for the combo boxes
@@ -33,6 +37,14 @@ namespace TextAndPizza
             NorthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
             NorthExitCombo.DisplayMember = "Key";
             NorthExitCombo.ValueMember = "Value";
+            //This should make the dropdown boxes display the proper values of the north exit, but it doesn't. Must fix this.
+            if (WorldBuild.worldRooms[selected.Text].NorthExit != null)
+            {
+                NorthExitCombo.SelectedValue = WorldBuild.worldRooms[selected.Text].NorthExit;
+            } else
+            {
+                NorthExitCombo.SelectedValue = WorldBuild.worldRooms[selected.Text];
+            }
             //East
             EastExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
             EastExitCombo.DisplayMember = "Key";
@@ -50,7 +62,23 @@ namespace TextAndPizza
             StartingRoomCombo.DisplayMember = "Key";
             StartingRoomCombo.ValueMember = "Value";
             //Set combo box values
-            StartingRoomCombo.SelectedValue = WorldBuild.CurrentRoom;
+            if (WorldBuild.CurrentRoom != null)
+            {
+                StartingRoomCombo.SelectedValue = WorldBuild.CurrentRoom;
+            } else
+            {
+                StartingRoomCombo.SelectedValue = selectedRoom;
+            }
+            //Manage the items pane
+            ItemTreeView.Nodes.Clear();
+            ItemName.Text = "";
+            ItemDescription.Text = "";
+            ItemDefence.Text = "0";
+            ItemStrength.Text = "0";
+            foreach (KeyValuePair<String, Item> entry in selectedRoom.Item)
+            {
+                ItemTreeView.Nodes.Add(entry.Key);
+            }
         }
 
         private void makeUneditable()
@@ -78,6 +106,7 @@ namespace TextAndPizza
             WestExitCombo.Visible = false;
             StartingRoomLabel.Visible = false;
             StartingRoomCombo.Visible = false;
+            ItemEntityTabs.Visible = false;
         }
 
         private void showAll()
@@ -99,9 +128,7 @@ namespace TextAndPizza
             WestExitCombo.Visible = true;
             StartingRoomLabel.Visible = true;
             StartingRoomCombo.Visible = true;
-
-
-
+            ItemEntityTabs.Visible = true;
         }
 
         private void makeEditable()
@@ -147,6 +174,7 @@ namespace TextAndPizza
         {
             WorldBuild.setStartRoom(StartingRoomCombo.Text);
             WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapwf");
+            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\" + WorldName.Text + ".tapwf");
         }
 
         private void ItemsTab_Click(object sender, EventArgs e)
@@ -207,7 +235,7 @@ namespace TextAndPizza
 
         }
 
-        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        private void toolStripItemId_Click(object sender, EventArgs e)
         {
 
         }
@@ -263,6 +291,79 @@ namespace TextAndPizza
             {
                 WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[WestExitCombo.Text]);
             }
+        }
+
+        private void ItemTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EntityTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void StrengthMinusButton_Click(object sender, EventArgs e)
+        {
+            int n = Int32.Parse(ItemStrength.Text);
+            n--;
+            ItemStrength.Text = n.ToString();
+        }
+
+        private void StrengthPlusButton_Click(object sender, EventArgs e)
+        {
+            int n = Int32.Parse(ItemStrength.Text);
+            n++;
+            ItemStrength.Text = n.ToString();
+        }
+
+        private void ItemName_TextChanged(object sender, EventArgs e)
+        {
+            selectedRoom.changeItemName(selectedItem.Text, ItemName.Text);
+        }
+
+        private void ItemDescription_TextChanged(object sender, EventArgs e)
+        {
+            selectedRoom.changeItemDescription(selectedItem.Text, ItemDescription.Text);
+        }
+
+        private void ItemTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            selectedItem = ItemTreeView.SelectedNode;
+            ItemName.Text = selectedRoom.Item[selectedItem.Text].getName();
+            ItemDescription.Text = selectedRoom.Item[selectedItem.Text].getDescription();
+            ItemStrength.Text = selectedRoom.Item[selectedItem.Text].getStrengthStats().ToString();
+            ItemDefence.Text = selectedRoom.Item[selectedItem.Text].getDefenceStats().ToString();
+        }
+
+        private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ItemTreeView.Nodes.Add(ItemId.Text);
+            WorldBuild.worldRooms[selected.Text].addItem(ItemId.Text, null, null, 0, 0);
+        }
+
+        private void ItemStrength_TextChanged(object sender, EventArgs e)
+        {
+            selectedRoom.changeItemStrength(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+        }
+
+        private void ItemDefence_TextChanged(object sender, EventArgs e)
+        {
+            selectedRoom.changeItemDefence(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+        }
+
+        private void DefenceMinusButton_Click(object sender, EventArgs e)
+        {
+            int n = Int32.Parse(ItemDefence.Text);
+            n--;
+            ItemDefence.Text = n.ToString();
+        }
+
+        private void DefencePlusButton_Click(object sender, EventArgs e)
+        {
+            int n = Int32.Parse(ItemDefence.Text);
+                n++;
+            ItemDefence.Text = n.ToString();
         }
     }
 }

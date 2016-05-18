@@ -25,9 +25,35 @@ namespace TextAndPizza
             Description = description;
         }
 
-        public void addItem(String name, Item item)
+        public void addItem(String id, String name, String description, int strength, int defence)
         {
-            Item.Add(name, item);
+            Item item = new Item(name, description);
+            item.setStats(strength, defence);
+            Item.Add(id, item);
+            Items = getItems();
+        }
+
+        public void changeItemName(String id, String name)
+        {
+            Item[id].setName(name);
+            Items = getItems();
+        }
+
+        public void changeItemDescription(String id, String description)
+        {
+            Item[id].setDescription(description);
+            Items = getItems();
+        }
+
+        public void changeItemStrength(String id, int strength)
+        {
+            Item[id].StrengthStats = strength;
+            Items = getItems();
+        }
+
+        public void changeItemDefence(String id, int defence)
+        {
+            Item[id].DefenceStats = defence;
             Items = getItems();
         }
 

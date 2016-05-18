@@ -335,7 +335,7 @@ namespace TextAndPizza
                             }
                             foreach (Item itm in PickupItems)
                             {
-                                GameWorld.CurrentRoom.getItems().Remove(itm);
+                                GameWorld.CurrentRoom.Items.Remove(itm);
                             }
                             if (ItmCounter == 0)
                             {

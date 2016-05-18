@@ -122,6 +122,11 @@ namespace TextAndPizza
             DungeonRoomN.setNorthExit(DungeonRoomExit);*/
         }
 
+        public void deleteRoom(String id)
+        {
+            worldRooms.Remove(id);
+        }
+
         // Saves the current world state to a file in the Users AppData
         public void Save(String path)
         {
@@ -130,7 +135,6 @@ namespace TextAndPizza
 
             // Save the world
             Stream stream = null;
-            MessageBox.Show(path);
             try
             {
                 IFormatter formatter = new BinaryFormatter();
