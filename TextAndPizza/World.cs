@@ -158,7 +158,7 @@ namespace TextAndPizza
             String fileName = Environment.ExpandEnvironmentVariables(path);
             //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
 
-            if (fileName.Contains(".bin"))
+            if (Path.GetExtension(path) == ".tapwf")
             {
                 // Load the file
                 Stream stream = null;
@@ -187,7 +187,7 @@ namespace TextAndPizza
             }
             else
             {
-                MessageBox.Show("There was a problem with your world. Please ensure it is a \".bin\" file");
+                MessageBox.Show("There was a problem with your world. Please ensure it is a Text and Pizza World File (\".tapwf\")");
                 return null;
             } 
         }

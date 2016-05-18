@@ -35,7 +35,7 @@ namespace TextAndPizza
             InitializeComponent();
             this.AcceptButton = null;
             this.ActiveControl = InputBox;
-            PrintMessage("Welcome to " + name + " v" + vno + Environment.NewLine + "Type 'help' for help." + Environment.NewLine + "You can also type 'load' to load from a save file or 'new game' to start a new game");
+            PrintMessage("Welcome to " + name + " v" + vno + Environment.NewLine + "Type 'help' for help." + Environment.NewLine + "You can also type 'load' to load a world from a file.");
             ChatLog = new List<String>();
             ChatLogNum = ChatLog.Count();
             // Initalize the world
@@ -151,9 +151,9 @@ namespace TextAndPizza
 
         public void RunCommand(String s)
         {
+            ChatLog.Add(s);
             if (gameStarted)
             {
-                ChatLog.Add(s);
                 if (GameWorld.Player.isDead())
                 {
                     s = "quit";
