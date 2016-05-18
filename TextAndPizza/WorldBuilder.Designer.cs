@@ -40,19 +40,24 @@
             this.entityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RoomName = new System.Windows.Forms.TextBox();
             this.RoomNameLabel = new System.Windows.Forms.Label();
-            this.ItemsLabel = new System.Windows.Forms.Label();
-            this.ItemsTree = new System.Windows.Forms.TreeView();
-            this.EntityLabel = new System.Windows.Forms.Label();
-            this.EntityTree = new System.Windows.Forms.TreeView();
-            this.SaveButton = new System.Windows.Forms.Button();
+            this.RoomDescription = new System.Windows.Forms.TextBox();
+            this.RoomDescriptionLabel = new System.Windows.Forms.Label();
+            this.ItemsAndEntitesTabs = new System.Windows.Forms.TabControl();
+            this.ItemsTab = new System.Windows.Forms.TabPage();
+            this.EntitiesTab = new System.Windows.Forms.TabPage();
+            this.WorldName = new System.Windows.Forms.TextBox();
+            this.WorldNameLabel = new System.Windows.Forms.Label();
+            this.RoomId = new System.Windows.Forms.ToolStripTextBox();
+            this.addRoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
+            this.ItemsAndEntitesTabs.SuspendLayout();
             this.SuspendLayout();
             // 
             // worldTreeView
             // 
             this.worldTreeView.Location = new System.Drawing.Point(12, 28);
             this.worldTreeView.Name = "worldTreeView";
-            this.worldTreeView.Size = new System.Drawing.Size(178, 382);
+            this.worldTreeView.Size = new System.Drawing.Size(178, 142);
             this.worldTreeView.TabIndex = 0;
             this.worldTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.worldTreeView_AfterSelect);
             // 
@@ -80,14 +85,15 @@
             // openWorldToolStripMenuItem
             // 
             this.openWorldToolStripMenuItem.Name = "openWorldToolStripMenuItem";
-            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.openWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openWorldToolStripMenuItem.Text = "Open World...";
             // 
             // saveWorldToolStripMenuItem
             // 
             this.saveWorldToolStripMenuItem.Name = "saveWorldToolStripMenuItem";
-            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.saveWorldToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveWorldToolStripMenuItem.Text = "Save World...";
+            this.saveWorldToolStripMenuItem.Click += new System.EventHandler(this.saveWorldToolStripMenuItem_Click);
             // 
             // newToolStripMenuItem
             // 
@@ -102,6 +108,9 @@
             // 
             // roomToolStripMenuItem
             // 
+            this.roomToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.RoomId,
+            this.addRoomToolStripMenuItem});
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
             this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.roomToolStripMenuItem.Text = "Room";
@@ -137,59 +146,96 @@
             this.RoomNameLabel.TabIndex = 3;
             this.RoomNameLabel.Text = "Room Name:";
             // 
-            // ItemsLabel
+            // RoomDescription
             // 
-            this.ItemsLabel.AutoSize = true;
-            this.ItemsLabel.Location = new System.Drawing.Point(268, 72);
-            this.ItemsLabel.Name = "ItemsLabel";
-            this.ItemsLabel.Size = new System.Drawing.Size(35, 13);
-            this.ItemsLabel.TabIndex = 4;
-            this.ItemsLabel.Text = "Items:";
+            this.RoomDescription.Location = new System.Drawing.Point(271, 54);
+            this.RoomDescription.Multiline = true;
+            this.RoomDescription.Name = "RoomDescription";
+            this.RoomDescription.Size = new System.Drawing.Size(435, 67);
+            this.RoomDescription.TabIndex = 4;
+            this.RoomDescription.TextChanged += new System.EventHandler(this.RoomDescription_TextChanged);
             // 
-            // ItemsTree
+            // RoomDescriptionLabel
             // 
-            this.ItemsTree.Location = new System.Drawing.Point(271, 88);
-            this.ItemsTree.Name = "ItemsTree";
-            this.ItemsTree.Size = new System.Drawing.Size(215, 233);
-            this.ItemsTree.TabIndex = 5;
-            this.ItemsTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.ItemsTree_AfterSelect);
+            this.RoomDescriptionLabel.AutoSize = true;
+            this.RoomDescriptionLabel.Location = new System.Drawing.Point(196, 57);
+            this.RoomDescriptionLabel.Name = "RoomDescriptionLabel";
+            this.RoomDescriptionLabel.Size = new System.Drawing.Size(63, 13);
+            this.RoomDescriptionLabel.TabIndex = 5;
+            this.RoomDescriptionLabel.Text = "Description:";
             // 
-            // EntityLabel
+            // ItemsAndEntitesTabs
             // 
-            this.EntityLabel.AutoSize = true;
-            this.EntityLabel.Location = new System.Drawing.Point(489, 72);
-            this.EntityLabel.Name = "EntityLabel";
-            this.EntityLabel.Size = new System.Drawing.Size(44, 13);
-            this.EntityLabel.TabIndex = 6;
-            this.EntityLabel.Text = "Entities:";
+            this.ItemsAndEntitesTabs.Controls.Add(this.ItemsTab);
+            this.ItemsAndEntitesTabs.Controls.Add(this.EntitiesTab);
+            this.ItemsAndEntitesTabs.Location = new System.Drawing.Point(271, 137);
+            this.ItemsAndEntitesTabs.Name = "ItemsAndEntitesTabs";
+            this.ItemsAndEntitesTabs.SelectedIndex = 0;
+            this.ItemsAndEntitesTabs.Size = new System.Drawing.Size(435, 273);
+            this.ItemsAndEntitesTabs.TabIndex = 6;
             // 
-            // EntityTree
+            // ItemsTab
             // 
-            this.EntityTree.Location = new System.Drawing.Point(492, 88);
-            this.EntityTree.Name = "EntityTree";
-            this.EntityTree.Size = new System.Drawing.Size(215, 233);
-            this.EntityTree.TabIndex = 7;
+            this.ItemsTab.Location = new System.Drawing.Point(4, 22);
+            this.ItemsTab.Name = "ItemsTab";
+            this.ItemsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ItemsTab.Size = new System.Drawing.Size(427, 247);
+            this.ItemsTab.TabIndex = 0;
+            this.ItemsTab.Text = "Items";
+            this.ItemsTab.UseVisualStyleBackColor = true;
+            this.ItemsTab.Click += new System.EventHandler(this.ItemsTab_Click);
             // 
-            // SaveButton
+            // EntitiesTab
             // 
-            this.SaveButton.Location = new System.Drawing.Point(631, 387);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveButton.TabIndex = 8;
-            this.SaveButton.Text = "Save";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            this.EntitiesTab.Location = new System.Drawing.Point(4, 22);
+            this.EntitiesTab.Name = "EntitiesTab";
+            this.EntitiesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.EntitiesTab.Size = new System.Drawing.Size(427, 247);
+            this.EntitiesTab.TabIndex = 1;
+            this.EntitiesTab.Text = "Entities";
+            this.EntitiesTab.UseVisualStyleBackColor = true;
+            this.EntitiesTab.Click += new System.EventHandler(this.EntitiesTab_Click);
+            // 
+            // WorldName
+            // 
+            this.WorldName.Location = new System.Drawing.Point(90, 176);
+            this.WorldName.Name = "WorldName";
+            this.WorldName.Size = new System.Drawing.Size(100, 20);
+            this.WorldName.TabIndex = 9;
+            this.WorldName.Text = "exampleworld";
+            // 
+            // WorldNameLabel
+            // 
+            this.WorldNameLabel.AutoSize = true;
+            this.WorldNameLabel.Location = new System.Drawing.Point(21, 179);
+            this.WorldNameLabel.Name = "WorldNameLabel";
+            this.WorldNameLabel.Size = new System.Drawing.Size(69, 13);
+            this.WorldNameLabel.TabIndex = 10;
+            this.WorldNameLabel.Text = "World Name:";
+            // 
+            // RoomId
+            // 
+            this.RoomId.Name = "RoomId";
+            this.RoomId.Size = new System.Drawing.Size(100, 23);
+            this.RoomId.Text = "Room ID";
+            // 
+            // addRoomToolStripMenuItem
+            // 
+            this.addRoomToolStripMenuItem.Name = "addRoomToolStripMenuItem";
+            this.addRoomToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.addRoomToolStripMenuItem.Text = "Add Room";
+            this.addRoomToolStripMenuItem.Click += new System.EventHandler(this.addRoomToolStripMenuItem_Click);
             // 
             // WorldBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 422);
-            this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.EntityTree);
-            this.Controls.Add(this.EntityLabel);
-            this.Controls.Add(this.ItemsTree);
-            this.Controls.Add(this.ItemsLabel);
+            this.Controls.Add(this.WorldNameLabel);
+            this.Controls.Add(this.WorldName);
+            this.Controls.Add(this.ItemsAndEntitesTabs);
+            this.Controls.Add(this.RoomDescriptionLabel);
+            this.Controls.Add(this.RoomDescription);
             this.Controls.Add(this.RoomNameLabel);
             this.Controls.Add(this.RoomName);
             this.Controls.Add(this.worldTreeView);
@@ -200,6 +246,7 @@
             this.Text = "WorldBuilder";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.ItemsAndEntitesTabs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,10 +265,14 @@
         private System.Windows.Forms.ToolStripMenuItem entityToolStripMenuItem;
         private System.Windows.Forms.TextBox RoomName;
         private System.Windows.Forms.Label RoomNameLabel;
-        private System.Windows.Forms.Label ItemsLabel;
-        private System.Windows.Forms.TreeView ItemsTree;
-        private System.Windows.Forms.Label EntityLabel;
-        private System.Windows.Forms.TreeView EntityTree;
-        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.TextBox RoomDescription;
+        private System.Windows.Forms.Label RoomDescriptionLabel;
+        private System.Windows.Forms.TabControl ItemsAndEntitesTabs;
+        private System.Windows.Forms.TabPage ItemsTab;
+        private System.Windows.Forms.TabPage EntitiesTab;
+        private System.Windows.Forms.TextBox WorldName;
+        private System.Windows.Forms.Label WorldNameLabel;
+        private System.Windows.Forms.ToolStripTextBox RoomId;
+        private System.Windows.Forms.ToolStripMenuItem addRoomToolStripMenuItem;
     }
 }

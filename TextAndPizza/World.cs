@@ -21,7 +21,7 @@ namespace TextAndPizza
         public int Balance = 0;
         public Room CurrentRoom { get; set; }
         public int Direction;
-        Dictionary<string, Room> worldRooms = new Dictionary<string, Room>();
+        public Dictionary<string, Room> worldRooms = new Dictionary<string, Room>();
 
         // Data related to the rooms and layout of the world
         // TODO: Make this just an array of rooms to allow things such as loading a different level
@@ -46,18 +46,27 @@ namespace TextAndPizza
 
             // Initalize Rooms
             //InitalizeRooms();
-            //CurrentRoom = DungeonRoomC;
         }
 
+        public void setStartRoom(String id)
+        {
+            CurrentRoom = worldRooms[id];
+        }
 
         //Add rooms through this (For the world builder)
         public void AddRoom(String id, String name, String description, List<Item> items, List<Entity> entities, Room nExit, Room sExit, Room eExit, Room wExit)
         {
+            //Create a room
             Room room = new Room(name, description);
+            //set room items and entities
             room.setItems(items);
             room.setEntities(entities);
-            //Might change to coordinate system, may be a LOT easier...
+            //Set room exits
             room.setNorthExit(nExit);
+            room.setEastExit(eExit);
+            room.setSouthExit(sExit);
+            room.setWestExit(wExit);
+            //Add room to the rooms dictionary
             worldRooms.Add(id, room);
         }
 
@@ -65,9 +74,6 @@ namespace TextAndPizza
         // TODO: Make this more generic
         public void InitalizeRooms()
         {
-
-
-
 
             /*//DungeonRoomC
             DungeonRoomC = new Room("Dungeon Room",

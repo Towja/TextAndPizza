@@ -41,7 +41,6 @@ namespace TextAndPizza
             // Initalize the world
             GameWorld = new World();
             //PrintMessage(RoomString(GameWorld.CurrentRoom))
-            MessageBox.Show("In the world class line 127 and line 158 are broken, check them out.");
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -482,6 +481,21 @@ namespace TextAndPizza
                             gameStarted = true;
                             // Print the current room's string to orient the player with their new world
                             PrintMessage(RoomString(GameWorld.CurrentRoom));
+                            Image compass = CompassBox.Image;
+                            if (GameWorld.Direction == 0)
+                            {
+                                //
+                            } else if (GameWorld.Direction == 1)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            } else if (GameWorld.Direction == 2)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            } else if (GameWorld.Direction == 3)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            }
+                            CompassBox.Image = compass;
                         }
                         else
                         {
@@ -657,7 +671,7 @@ namespace TextAndPizza
             else
             {
                 //Change to the room you want them to start in!
-                EnterRoom(GameWorld.DungeonRoomC);
+                EnterRoom(GameWorld.CurrentRoom);
             }
         }
 
