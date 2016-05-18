@@ -12,6 +12,7 @@ namespace TextAndPizza
         public String Name { get; set; }
         public String Description { get; set; }
         public List<Item> Items { get; set; }
+        public Dictionary<String, Item> Item = new Dictionary<String, Item>();
         public List<Entity> Entities { get; set; }
         public Room NorthExit { get; set; }
         public Room SouthExit { get; set; }
@@ -22,6 +23,12 @@ namespace TextAndPizza
         {
             Name = name;
             Description = description;
+        }
+
+        public void addItem(String name, Item item)
+        {
+            Item.Add(name, item);
+            Items = getItems();
         }
 
         public void setName(String s)
@@ -41,7 +48,13 @@ namespace TextAndPizza
 
         public List<Item> getItems()
         {
-            return Items;
+            List<Item> itmL = new List<Item>();
+            foreach (KeyValuePair<String, Item> itm in Item)
+            {
+                itmL.Add(itm.Value);
+            }
+            //return Items;
+            return itmL;
         }
 
         public void setEntities(List<Entity> en)

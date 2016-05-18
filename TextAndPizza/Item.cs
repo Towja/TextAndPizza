@@ -11,12 +11,10 @@ namespace TextAndPizza
     {
         public String Name { get; set; }
         public String Description { get; set; }
-        public String[] Verbs { get; set; }
-        public String Color { get; set; }
-        public Boolean canPickup { get; set; }
-        public Boolean givesLight { get; set; }
         public int StrengthStats { get; set; }
         public int DefenceStats { get; set; }
+        public Boolean canPickup { get; set; }
+        public Boolean givesLight { get; set; }
 
 
         public Item(String name, String description)
