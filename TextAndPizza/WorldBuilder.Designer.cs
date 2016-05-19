@@ -79,9 +79,15 @@
             this.ItemName = new System.Windows.Forms.TextBox();
             this.ItemTreeView = new System.Windows.Forms.TreeView();
             this.EntityTab = new System.Windows.Forms.TabPage();
+            this.EntityTreeView = new System.Windows.Forms.TreeView();
+            this.EntityName = new System.Windows.Forms.TextBox();
+            this.EntityDescription = new System.Windows.Forms.TextBox();
+            this.EntityNameLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.ItemEntityTabs.SuspendLayout();
             this.ItemTab.SuspendLayout();
+            this.EntityTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // worldTreeView
@@ -214,12 +220,14 @@
             this.EntityId.Name = "EntityId";
             this.EntityId.Size = new System.Drawing.Size(100, 23);
             this.EntityId.Text = "EntityID";
+            this.EntityId.Click += new System.EventHandler(this.EntityId_Click);
             // 
             // addEntityToolStripMenuItem
             // 
             this.addEntityToolStripMenuItem.Name = "addEntityToolStripMenuItem";
             this.addEntityToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.addEntityToolStripMenuItem.Text = "Add Entity";
+            this.addEntityToolStripMenuItem.Click += new System.EventHandler(this.addEntityToolStripMenuItem_Click);
             // 
             // RoomName
             // 
@@ -526,14 +534,62 @@
             // 
             // EntityTab
             // 
+            this.EntityTab.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.EntityTab.Controls.Add(this.label1);
+            this.EntityTab.Controls.Add(this.EntityNameLabel);
+            this.EntityTab.Controls.Add(this.EntityDescription);
+            this.EntityTab.Controls.Add(this.EntityName);
+            this.EntityTab.Controls.Add(this.EntityTreeView);
             this.EntityTab.Location = new System.Drawing.Point(4, 22);
             this.EntityTab.Name = "EntityTab";
             this.EntityTab.Padding = new System.Windows.Forms.Padding(3);
             this.EntityTab.Size = new System.Drawing.Size(300, 257);
             this.EntityTab.TabIndex = 1;
             this.EntityTab.Text = "Entities";
-            this.EntityTab.UseVisualStyleBackColor = true;
             this.EntityTab.Click += new System.EventHandler(this.EntityTab_Click);
+            // 
+            // EntityTreeView
+            // 
+            this.EntityTreeView.Location = new System.Drawing.Point(3, 5);
+            this.EntityTreeView.Name = "EntityTreeView";
+            this.EntityTreeView.Size = new System.Drawing.Size(91, 246);
+            this.EntityTreeView.TabIndex = 1;
+            this.EntityTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.EntityTreeView_AfterSelect);
+            // 
+            // EntityName
+            // 
+            this.EntityName.Location = new System.Drawing.Point(171, 6);
+            this.EntityName.Name = "EntityName";
+            this.EntityName.Size = new System.Drawing.Size(123, 20);
+            this.EntityName.TabIndex = 23;
+            this.EntityName.TextChanged += new System.EventHandler(this.EntityName_TextChanged);
+            // 
+            // EntityDescription
+            // 
+            this.EntityDescription.Location = new System.Drawing.Point(171, 32);
+            this.EntityDescription.Multiline = true;
+            this.EntityDescription.Name = "EntityDescription";
+            this.EntityDescription.Size = new System.Drawing.Size(123, 48);
+            this.EntityDescription.TabIndex = 24;
+            this.EntityDescription.TextChanged += new System.EventHandler(this.EntityDescription_TextChanged);
+            // 
+            // EntityNameLabel
+            // 
+            this.EntityNameLabel.AutoSize = true;
+            this.EntityNameLabel.Location = new System.Drawing.Point(100, 8);
+            this.EntityNameLabel.Name = "EntityNameLabel";
+            this.EntityNameLabel.Size = new System.Drawing.Size(38, 13);
+            this.EntityNameLabel.TabIndex = 26;
+            this.EntityNameLabel.Text = "Name:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(100, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Description:";
             // 
             // WorldBuilder
             // 
@@ -569,6 +625,8 @@
             this.ItemEntityTabs.ResumeLayout(false);
             this.ItemTab.ResumeLayout(false);
             this.ItemTab.PerformLayout();
+            this.EntityTab.ResumeLayout(false);
+            this.EntityTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,5 +684,10 @@
         private System.Windows.Forms.TextBox ItemDefence;
         private System.Windows.Forms.TextBox ItemStrength;
         private System.Windows.Forms.Button DefenceMinusButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label EntityNameLabel;
+        private System.Windows.Forms.TextBox EntityDescription;
+        private System.Windows.Forms.TextBox EntityName;
+        private System.Windows.Forms.TreeView EntityTreeView;
     }
 }

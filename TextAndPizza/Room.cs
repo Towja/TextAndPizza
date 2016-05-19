@@ -14,6 +14,7 @@ namespace TextAndPizza
         public List<Item> Items { get; set; }
         public Dictionary<String, Item> Item = new Dictionary<String, Item>();
         public List<Entity> Entities { get; set; }
+        public Dictionary<String, Entity> EntityD = new Dictionary<String, Entity>();
         public Room NorthExit { get; set; }
         public Room SouthExit { get; set; }
         public Room EastExit { get; set; }
@@ -23,6 +24,13 @@ namespace TextAndPizza
         {
             Name = name;
             Description = description;
+        }
+
+        public void addEntity(String id, String name, int health, int strength, int defence)
+        {
+            Entity entity = new Entity(name, health, strength, defence);
+            EntityD.Add(id, entity);
+            Entities = getEntities();
         }
 
         public void addItem(String id, String name, String description, int strength, int defence)
@@ -93,7 +101,12 @@ namespace TextAndPizza
 
         public List<Entity> getEntities()
         {
-            return Entities;
+            List<Entity> entL = new List<Entity>();
+            foreach (KeyValuePair<String, Entity> ent in EntityD)
+            {
+                entL.Add(ent.Value);
+            }
+            return entL;
         }
 
         public void setDescription(String s)

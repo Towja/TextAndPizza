@@ -348,7 +348,7 @@ namespace TextAndPizza
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ItemTreeView.Nodes.Add(ItemId.Text);
-            WorldBuild.worldRooms[selected.Text].addItem(ItemId.Text, null, null, 0, 0);
+            selectedRoom.addItem(ItemId.Text, null, null, 0, 0);
         }
 
         private void ItemStrength_TextChanged(object sender, EventArgs e)
@@ -379,6 +379,37 @@ namespace TextAndPizza
             int n = Int32.Parse(ItemDefence.Text);
                 n++;
             ItemDefence.Text = n.ToString();
+        }
+
+        private void EntityTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
+        private void EntityName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EntityDescription_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addEntityToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EntityTreeView.Nodes.Add(EntityId.Text);
+            try {
+                selectedRoom.addEntity(EntityId.Text, null, 1, 0, 0);
+            } catch
+            {
+                //Ignore
+            }
+        }
+
+        private void EntityId_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
