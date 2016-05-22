@@ -213,10 +213,24 @@ namespace TextAndPizza
 
         private void addRoomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WorldBuild.AddRoom(RoomId.Text, null, null, null, null, null, null, null, null);
-            TreeNode roomNode = worldTreeView.Nodes.Add(RoomId.Text);
-            //worldTreeView.SelectedNode = roomNode;
-            getComboData();
+            Boolean unique = true;
+            foreach (TreeNode n in worldTreeView.Nodes)
+            {
+                if (n.Text == RoomId.Text)
+                {
+                    unique = false;
+                }
+            }
+            if (unique)
+            {
+                WorldBuild.AddRoom(RoomId.Text, null, null, null, null, null, null, null, null);
+                TreeNode roomNode = worldTreeView.Nodes.Add(RoomId.Text);
+                getComboData();
+            }
+            else
+            {
+                MessageBox.Show("You cannot create two rooms with the same ID");
+            }
         }
 
         private void RoomDescription_TextChanged(object sender, EventArgs e)
@@ -421,8 +435,22 @@ namespace TextAndPizza
 
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ItemTreeView.Nodes.Add(ItemId.Text);
-            selectedRoom.addItem(ItemId.Text, null, null, 0, 0);
+            Boolean unique = true;
+            foreach (TreeNode n in ItemTreeView.Nodes)
+            {
+                if (n.Text == ItemId.Text)
+                {
+                    unique = false;
+                }
+            }
+            if (unique)
+            {
+                ItemTreeView.Nodes.Add(ItemId.Text);
+                selectedRoom.addItem(ItemId.Text, null, null, 0, 0);
+            } else
+            {
+                MessageBox.Show("You cannot create two items with the same ID");
+            }
         }
 
         private void ItemStrength_TextChanged(object sender, EventArgs e)
@@ -472,12 +500,29 @@ namespace TextAndPizza
 
         private void addEntityToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EntityTreeView.Nodes.Add(EntityId.Text);
-            try {
-                selectedRoom.addEntity(EntityId.Text, "", 1, 0, 0);
-            } catch
+            Boolean unique = true;
+            foreach (TreeNode n in EntityTreeView.Nodes)
             {
-                MessageBox.Show("Entity could not be added");
+                if (n.Text == EntityId.Text)
+                {
+                    unique = false;
+                }
+            }
+            if (unique)
+            {
+                EntityTreeView.Nodes.Add(EntityId.Text);
+                try
+                {
+                    selectedRoom.addEntity(EntityId.Text, "", 1, 0, 0);
+                }
+                catch
+                {
+                    MessageBox.Show("Entity could not be added");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You cannot create two entities with the same ID");
             }
         }
 
