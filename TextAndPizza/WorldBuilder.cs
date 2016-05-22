@@ -18,6 +18,7 @@ namespace TextAndPizza
         public TreeNode selectedEntity;
         World WorldBuild;
         Room selectedRoom;
+        Entity selectedE;
 
         public WorldBuilder()
         {
@@ -80,6 +81,16 @@ namespace TextAndPizza
             {
                 ItemTreeView.Nodes.Add(entry.Key);
             }
+            //Manage the entities pane
+            selectedEntity = null;
+            EntityTreeView.Nodes.Clear();
+            EntityName.Text = "";
+            EntityDescription.Text = "";
+            foreach (KeyValuePair<String, Entity> entry in selectedRoom.EntityD)
+            {
+                EntityTreeView.Nodes.Add(entry.Key);
+            }
+            selectedE = null;
         }
 
         private void makeUneditable()
@@ -395,33 +406,36 @@ namespace TextAndPizza
 
         private void EntityTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-
+            selectedEntity = EntityTreeView.SelectedNode;
+            selectedE = selectedRoom.EntityD[selectedEntity.Text];
+            EntityName.Text = selectedE.getName();
         }
 
         private void EntityName_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void EntityDescription_TextChanged(object sender, EventArgs e)
-        {
-
+            selectedE.setName(EntityName.Text);
         }
 
         private void addEntityToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EntityTreeView.Nodes.Add(EntityId.Text);
             try {
-                selectedRoom.addEntity(EntityId.Text, null, 1, 0, 0);
+                selectedRoom.addEntity(EntityId.Text, "", 1, 0, 0);
             } catch
             {
-                //Ignore
+                MessageBox.Show("Entity could not be added");
             }
         }
 
         private void EntityId_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void EntityHealth_TextChanged(object sender, EventArgs e)
+        {
+
+            selectedE.setMaxHealth(Int32.Parse(EntityHealth.Text));
         }
     }
 }
