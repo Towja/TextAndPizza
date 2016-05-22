@@ -34,34 +34,41 @@ namespace TextAndPizza
             RoomName.Text = WorldBuild.worldRooms[selected.Text].Name;
             RoomDescription.Text = WorldBuild.worldRooms[selected.Text].Description;
             //Load the data for the combo boxes
-            //North
-            NorthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
-            NorthExitCombo.DisplayMember = "Key";
-            NorthExitCombo.ValueMember = "Value";
-            //This should make the dropdown boxes display the proper values of the north exit, but it doesn't. Must fix this.
-            if (WorldBuild.worldRooms[selected.Text].NorthExit != null)
+            //This should make the dropdown boxes display the proper values of the north exit.
+            if (selectedRoom.NorthExit != null)
             {
-                NorthExitCombo.SelectedValue = WorldBuild.worldRooms[selected.Text].NorthExit;
+                NorthExitCombo.SelectedValue = selectedRoom.NorthExit;
             } else
             {
-                NorthExitCombo.SelectedValue = WorldBuild.worldRooms[selected.Text];
+                NorthExitCombo.SelectedValue = selectedRoom;
             }
             //East
-            EastExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
-            EastExitCombo.DisplayMember = "Key";
-            EastExitCombo.ValueMember = "Value";
-            //South
-            SouthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
-            SouthExitCombo.DisplayMember = "Key";
-            SouthExitCombo.ValueMember = "Value";
+            if (selectedRoom.EastExit != null)
+            {
+                EastExitCombo.SelectedValue = selectedRoom.EastExit;
+            }
+            else
+            {
+                EastExitCombo.SelectedValue = selectedRoom;
+            }
             //West
-            WestExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
-            WestExitCombo.DisplayMember = "Key";
-            WestExitCombo.ValueMember = "Value";
-            //BeginingRoom
-            StartingRoomCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
-            StartingRoomCombo.DisplayMember = "Key";
-            StartingRoomCombo.ValueMember = "Value";
+            if (selectedRoom.WestExit != null)
+            {
+                WestExitCombo.SelectedValue = selectedRoom.WestExit;
+            }
+            else
+            {
+                WestExitCombo.SelectedValue = selectedRoom;
+            }
+            //South
+            if (selectedRoom.SouthExit != null)
+            {
+                SouthExitCombo.SelectedValue = selectedRoom.SouthExit;
+            }
+            else
+            {
+                SouthExitCombo.SelectedValue = selectedRoom;
+            }
             //Set combo box values
             if (WorldBuild.CurrentRoom != null)
             {
@@ -208,6 +215,8 @@ namespace TextAndPizza
         {
             WorldBuild.AddRoom(RoomId.Text, null, null, null, null, null, null, null, null);
             TreeNode roomNode = worldTreeView.Nodes.Add(RoomId.Text);
+            //worldTreeView.SelectedNode = roomNode;
+            getComboData();
         }
 
         private void RoomDescription_TextChanged(object sender, EventArgs e)
@@ -242,7 +251,31 @@ namespace TextAndPizza
                     }
                 }
             }
+            getComboData();
+        }
 
+        private void getComboData()
+        {
+            //North
+            NorthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            NorthExitCombo.DisplayMember = "Key";
+            NorthExitCombo.ValueMember = "Value";
+            //East
+            EastExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            EastExitCombo.DisplayMember = "Key";
+            EastExitCombo.ValueMember = "Value";
+            //South
+            SouthExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            SouthExitCombo.DisplayMember = "Key";
+            SouthExitCombo.ValueMember = "Value";
+            //West
+            WestExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            WestExitCombo.DisplayMember = "Key";
+            WestExitCombo.ValueMember = "Value";
+            //BeginingRoom
+            StartingRoomCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
+            StartingRoomCombo.DisplayMember = "Key";
+            StartingRoomCombo.ValueMember = "Value";
         }
 
         private void OpenWorldDialog_FileOk(object sender, CancelEventArgs e)
@@ -279,49 +312,61 @@ namespace TextAndPizza
 
         private void NorthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ParseRoomId(NorthExitCombo.Text) == selected.Text)
+            if (selected != null)
             {
-                WorldBuild.worldRooms[selected.Text].setNorthExit(null);
-            }
-            else
-            {
-                WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[ParseRoomId(NorthExitCombo.Text)]);
+                if (ParseRoomId(NorthExitCombo.Text) == selected.Text)
+                {
+                    WorldBuild.worldRooms[selected.Text].setNorthExit(null);
+                }
+                else
+                {
+                    WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[ParseRoomId(NorthExitCombo.Text)]);
+                }
             }
         }
 
         private void EastExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ParseRoomId(EastExitCombo.Text) == selected.Text)
+            if (selected != null)
             {
-                WorldBuild.worldRooms[selected.Text].setEastExit(null);
-            }
-            else
-            {
-                WorldBuild.worldRooms[selected.Text].setEastExit(WorldBuild.worldRooms[ParseRoomId(EastExitCombo.Text)]);
+                if (ParseRoomId(EastExitCombo.Text) == selected.Text)
+                {
+                    WorldBuild.worldRooms[selected.Text].setEastExit(null);
+                }
+                else
+                {
+                    WorldBuild.worldRooms[selected.Text].setEastExit(WorldBuild.worldRooms[ParseRoomId(EastExitCombo.Text)]);
+                }
             }
         }
 
         private void SouthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ParseRoomId(SouthExitCombo.Text) == selected.Text)
+            if (selected != null)
             {
-                WorldBuild.worldRooms[selected.Text].setSouthExit(null);
-            }
-            else
-            {
-                WorldBuild.worldRooms[selected.Text].setSouthExit(WorldBuild.worldRooms[ParseRoomId(SouthExitCombo.Text)]);
+                if (ParseRoomId(SouthExitCombo.Text) == selected.Text)
+                {
+                    WorldBuild.worldRooms[selected.Text].setSouthExit(null);
+                }
+                else
+                {
+                    WorldBuild.worldRooms[selected.Text].setSouthExit(WorldBuild.worldRooms[ParseRoomId(SouthExitCombo.Text)]);
+                }
             }
         }
 
         private void WestExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ParseRoomId(WestExitCombo.Text) == selected.Text)
+            if (selected != null)
             {
-                WorldBuild.worldRooms[selected.Text].setWestExit(null);
-            }
-            else
-            {
-                WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[ParseRoomId(WestExitCombo.Text)]);
+                if (ParseRoomId(WestExitCombo.Text) == selected.Text)
+                {
+                    WorldBuild.worldRooms[selected.Text].setWestExit(null);
+                }
+                else
+                {
+                    WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[ParseRoomId(WestExitCombo.Text)]);
+                }
             }
         }
 
@@ -504,5 +549,20 @@ namespace TextAndPizza
             WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapsv");
             MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\" + WorldName.Text + ".tapsv");
         }
+
+        private void NorthExitCombo_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void StartingRoomCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           // WorldBuild.CurrentRoom = StartingRoomCombo.SelectedValue;
+        }
+
+        private void EastExitCombo_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
