@@ -38,7 +38,8 @@ namespace TextAndPizza
             if (selectedRoom.NorthExit != null)
             {
                 NorthExitCombo.SelectedValue = selectedRoom.NorthExit;
-            } else
+            }
+            else
             {
                 NorthExitCombo.SelectedValue = selectedRoom;
             }
@@ -73,7 +74,8 @@ namespace TextAndPizza
             if (WorldBuild.CurrentRoom != null)
             {
                 StartingRoomCombo.SelectedValue = WorldBuild.CurrentRoom;
-            } else
+            }
+            else
             {
                 StartingRoomCombo.SelectedValue = selectedRoom;
             }
@@ -165,12 +167,12 @@ namespace TextAndPizza
 
         private void roomToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
- 
+
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            
+
         }
 
         private void RoomName_TextChanged(object sender, EventArgs e)
@@ -183,12 +185,12 @@ namespace TextAndPizza
 
         private void ItemsTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-           
+
         }
 
         private void itemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void saveWorldToolStripMenuItem_Click(object sender, EventArgs e)
@@ -449,7 +451,8 @@ namespace TextAndPizza
             {
                 ItemTreeView.Nodes.Add(ItemId.Text);
                 selectedRoom.addItem(ItemId.Text, null, null, 0, 0);
-            } else
+            }
+            else
             {
                 MessageBox.Show("You cannot create two items with the same ID");
             }
@@ -481,7 +484,7 @@ namespace TextAndPizza
         private void DefencePlusButton_Click(object sender, EventArgs e)
         {
             int n = Int32.Parse(ItemDefence.Text);
-                n++;
+            n++;
             ItemDefence.Text = n.ToString();
         }
 
@@ -546,7 +549,7 @@ namespace TextAndPizza
             {
                 MessageBox.Show("You must only have numbers in the entity health box.");
             }
-            
+
         }
 
         private void WorldName_TextChanged(object sender, EventArgs e)
@@ -572,7 +575,7 @@ namespace TextAndPizza
             {
                 MessageBox.Show("You must only have numbers in the entity strength box");
             }
-            
+
         }
 
         private void EntityDefence_TextChanged(object sender, EventArgs e)
@@ -593,23 +596,25 @@ namespace TextAndPizza
         private void exportWorldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WorldBuild.setStartRoom(StartingRoomCombo.Text);
-            WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapsv");
-            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\" + WorldName.Text + ".tapsv");
-        }
-
-        private void NorthExitCombo_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void StartingRoomCombo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           // WorldBuild.CurrentRoom = StartingRoomCombo.SelectedValue;
-        }
-
-        private void EastExitCombo_Click(object sender, EventArgs e)
-        {
+            WorldBuild.Save("%appdata%\\textandpizza\\" + WorldName.Text + ".tapsv");
+            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\textandpizza\\" + WorldName.Text + ".tapsv");
 
         }
+
+    private void NorthExitCombo_Click(object sender, EventArgs e)
+    {
+    }
+
+    private void StartingRoomCombo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        // WorldBuild.CurrentRoom = StartingRoomCombo.SelectedValue;
+    }
+
+    private void EastExitCombo_Click(object sender, EventArgs e)
+    {
 
     }
+
 }
+}
+

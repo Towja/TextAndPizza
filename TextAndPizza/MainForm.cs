@@ -16,7 +16,7 @@ namespace TextAndPizza
     {
 
         String name = "Text & Pizza";
-        String vno = "0.5";
+        String vno = "0.9";
         List<String> ChatLog;
         int ChatLogNum;
         Boolean goNorth = false;
@@ -45,6 +45,7 @@ namespace TextAndPizza
             var appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             var TAP = Path.Combine(appdata, @"\TextAndPizza");
             Directory.CreateDirectory(TAP);
+            this.Text = this.Text + " v" + vno;
         }
 
         private void MainForm_Load(object sender, EventArgs e)
