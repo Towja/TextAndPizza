@@ -133,7 +133,7 @@ namespace TextAndPizza
             // Filename that the file will be saved to
             string fileName = Environment.ExpandEnvironmentVariables(path);
 
-            // Creates the directory (if not already created
+            // Creates the directory (if not already created)
             Directory.CreateDirectory(Path.GetDirectoryName(fileName));
 
             // Save the world
