@@ -192,8 +192,8 @@ namespace TextAndPizza
         private void saveWorldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WorldBuild.setStartRoom(StartingRoomCombo.Text);
-            WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapwf");
-            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\" + WorldName.Text + ".tapwf");
+            WorldBuild.Save("%appdata%\\textandpizza\\" + WorldName.Text + ".tapwf");
+            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\textandpizza\\" + WorldName.Text + ".tapwf");
         }
 
         private void ItemsTab_Click(object sender, EventArgs e)
