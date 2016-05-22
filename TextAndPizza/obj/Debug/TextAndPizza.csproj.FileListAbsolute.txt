@@ -27,3 +27,7 @@ C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizz
 C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.csproj.GenerateResource.Cache
 C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.WorldBuilder.resources
 C:\Users\walshb\OneDrive\Personal\Programming\Projects\TextAndPizza\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.WorldBuilder.resources
+C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizza.exe.manifest
+C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizza.application
+C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.exe.manifest
+C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.application
