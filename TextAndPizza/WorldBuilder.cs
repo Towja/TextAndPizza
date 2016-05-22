@@ -250,7 +250,7 @@ namespace TextAndPizza
 
         private void NorthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (NorthExitCombo.Text == selected.Text)
+            if (NorthExitCombo.Text.Contains(selected.Text))
             {
                 WorldBuild.worldRooms[selected.Text].setNorthExit(null);
             }
@@ -262,7 +262,7 @@ namespace TextAndPizza
 
         private void EastExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (EastExitCombo.Text == selected.Text)
+            if (EastExitCombo.Text.Contains(selected.Text))
             {
                 WorldBuild.worldRooms[selected.Text].setEastExit(null);
             }
@@ -274,7 +274,7 @@ namespace TextAndPizza
 
         private void SouthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SouthExitCombo.Text == selected.Text)
+            if (SouthExitCombo.Text.Contains(selected.Text))
             {
                 WorldBuild.worldRooms[selected.Text].setSouthExit(null);
             }
@@ -286,7 +286,7 @@ namespace TextAndPizza
 
         private void WestExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (WestExitCombo.Text == selected.Text)
+            if (WestExitCombo.Text.Contains(selected.Text))
             {
                 WorldBuild.worldRooms[selected.Text].setWestExit(null);
             }
