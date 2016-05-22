@@ -57,7 +57,7 @@ namespace TextAndPizza
             WestExitCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
             WestExitCombo.DisplayMember = "Key";
             WestExitCombo.ValueMember = "Value";
-            //BeginningRoom
+            //BeginingRoom
             StartingRoomCombo.DataSource = new BindingSource(WorldBuild.worldRooms, null);
             StartingRoomCombo.DisplayMember = "Key";
             StartingRoomCombo.ValueMember = "Value";
