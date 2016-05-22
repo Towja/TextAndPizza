@@ -154,13 +154,13 @@ namespace TextAndPizza
             }
         }
 
-        public static World Load(String path)
+        public static World Load(String path, String extension)
         {
             // Filename to load from
             String fileName = Environment.ExpandEnvironmentVariables(path);
             //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
 
-            if (Path.GetExtension(path) == ".tapwf")
+            if (Path.GetExtension(path) == extension)
             {
                 // Load the file
                 Stream stream = null;
@@ -189,7 +189,7 @@ namespace TextAndPizza
             }
             else
             {
-                MessageBox.Show("There was a problem with your world. Please ensure it is a Text and Pizza World File (\".tapwf\")");
+                MessageBox.Show("There was a problem with your world. Please ensure it is a Text and Pizza World File (\"" + extension + "\")");
                 return null;
             } 
         }

@@ -45,6 +45,7 @@ namespace TextAndPizza
         public void setMaxHealth(int i)
         {
             MaxHealth = i;
+            Health = i;
         }
 
         public int getMaxHealth()

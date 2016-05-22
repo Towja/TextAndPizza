@@ -85,7 +85,7 @@ namespace TextAndPizza
             selectedEntity = null;
             EntityTreeView.Nodes.Clear();
             EntityName.Text = "";
-            EntityDescription.Text = "";
+            EntityHealth.Text = "";
             foreach (KeyValuePair<String, Entity> entry in selectedRoom.EntityD)
             {
                 EntityTreeView.Nodes.Add(entry.Key);
@@ -220,23 +220,29 @@ namespace TextAndPizza
 
         private void RoomId_Click(object sender, EventArgs e)
         {
-
+            RoomId.Text = "";
         }
 
         private void openWorldToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (OpenWorldDialog.ShowDialog() == DialogResult.OK)
             {
-                showAll();
-                openWorldToolStripMenuItem.Enabled = false;
-                newWorldToolStripMenuItem.Enabled = false;
                 string worldPath = OpenWorldDialog.FileName;
-                WorldBuild = World.Load(worldPath);
-                foreach (KeyValuePair<String, Room> entry in WorldBuild.worldRooms)
+                WorldBuild = World.Load(worldPath, ".tapwf");
+                if (WorldBuild != null)
                 {
-                    worldTreeView.Nodes.Add(entry.Key);
+                    showAll();
+                    openWorldToolStripMenuItem.Enabled = false;
+                    newWorldToolStripMenuItem.Enabled = false;
+
+                    WorldName.Text = Path.GetFileNameWithoutExtension(worldPath);
+                    foreach (KeyValuePair<String, Room> entry in WorldBuild.worldRooms)
+                    {
+                        worldTreeView.Nodes.Add(entry.Key);
+                    }
                 }
             }
+
         }
 
         private void OpenWorldDialog_FileOk(object sender, CancelEventArgs e)
@@ -251,7 +257,7 @@ namespace TextAndPizza
 
         private void toolStripItemId_Click(object sender, EventArgs e)
         {
-
+            ItemId.Text = "";
         }
 
         private void newWorldToolStripMenuItem_Click(object sender, EventArgs e)
@@ -409,6 +415,9 @@ namespace TextAndPizza
             selectedEntity = EntityTreeView.SelectedNode;
             selectedE = selectedRoom.EntityD[selectedEntity.Text];
             EntityName.Text = selectedE.getName();
+            EntityHealth.Text = selectedE.getMaxHealth().ToString();
+            EntityDefence.Text = selectedE.getDefence().ToString();
+            EntityStrength.Text = selectedE.getStrength().ToString();
         }
 
         private void EntityName_TextChanged(object sender, EventArgs e)
@@ -429,13 +438,71 @@ namespace TextAndPizza
 
         private void EntityId_Click(object sender, EventArgs e)
         {
-
+            EntityId.Text = "";
         }
 
         private void EntityHealth_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                if (EntityHealth != null)
+                {
+                    selectedE.setMaxHealth(Int32.Parse(EntityHealth.Text));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You must only have numbers in the entity health box.");
+            }
+            
+        }
 
-            selectedE.setMaxHealth(Int32.Parse(EntityHealth.Text));
+        private void WorldName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WorldName_Click(object sender, EventArgs e)
+        {
+            WorldName.Text = "";
+        }
+
+        private void EntityStrength_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (EntityStrength.Text != null)
+                {
+                    selectedE.setStrength(Int32.Parse(EntityStrength.Text));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You must only have numbers in the entity strength box");
+            }
+            
+        }
+
+        private void EntityDefence_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (EntityDefence.Text != null)
+                {
+                    selectedE.setDefence(Int32.Parse(EntityDefence.Text));
+                }
+            }
+            catch
+            {
+                MessageBox.Show("You must only have numbers in the entity defence box");
+            }
+        }
+
+        private void exportWorldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WorldBuild.setStartRoom(StartingRoomCombo.Text);
+            WorldBuild.Save("%appdata%\\" + WorldName.Text + ".tapsv");
+            MessageBox.Show("World Saved:" + Environment.NewLine + "%appdata%\\" + WorldName.Text + ".tapsv");
         }
     }
 }

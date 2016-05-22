@@ -109,6 +109,13 @@ namespace TextAndPizza
             return entL;
         }
 
+        public void removeEntities(Entity en)
+        {
+            EntityD.Remove(en.getName());
+            Entities.Remove(en);
+
+        }
+
         public void setDescription(String s)
         {
             Description = s;
@@ -184,7 +191,7 @@ namespace TextAndPizza
                     msg = msg + "You also see some creatures:" + Environment.NewLine;
                     foreach (Entity en in Entities)
                     {
-                        msg = msg + "- " + en.getName() + Environment.NewLine;
+                            msg = msg + "- " + en.getName() + Environment.NewLine;
                     }
                 }
                 else

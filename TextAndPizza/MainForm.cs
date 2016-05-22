@@ -251,7 +251,8 @@ namespace TextAndPizza
                     DialogResult Save = MessageBox.Show("Would you like to save your game?", "Shutting Down", MessageBoxButtons.YesNoCancel);
                     if (Save == DialogResult.Yes)
                     {
-                        GameWorld.Save(worldPath);
+                        String savePath = worldPath.Replace(".tapwf", ".tapsv");
+                        GameWorld.Save(savePath);
                         Application.Exit();
                     }
                     else if (Save == DialogResult.No)
@@ -416,7 +417,8 @@ namespace TextAndPizza
 
                             foreach (Entity en in ToDie)
                             {
-                                GameWorld.CurrentRoom.getEntities().Remove(en);
+                                //GameWorld.CurrentRoom.getEntities().Remove(en);
+                                GameWorld.CurrentRoom.removeEntities(en);
                             }
                         }
                     }
@@ -487,34 +489,37 @@ namespace TextAndPizza
                     if (LoadWorldDialog.ShowDialog() == DialogResult.OK)
                     {
                         string filePath = LoadWorldDialog.FileName;
-                        worldPath = filePath;
-                        GameWorld = World.Load(filePath);
-                        if (GameWorld != null)
-                        {
-                            PrintMessage("Game loaded!" + Environment.NewLine);
-                            gameStarted = true;
-                            // Print the current room's string to orient the player with their new world
-                            PrintMessage(RoomString(GameWorld.CurrentRoom));
-                            Image compass = CompassBox.Image;
-                            if (GameWorld.Direction == 0)
+                            worldPath = filePath;
+                            GameWorld = World.Load(filePath, ".tapsv");
+                            if (GameWorld != null)
+                            {
+                                PrintMessage("Game loaded!" + Environment.NewLine);
+                                gameStarted = true;
+                                // Print the current room's string to orient the player with their new world
+                                PrintMessage(RoomString(GameWorld.CurrentRoom));
+                                Image compass = CompassBox.Image;
+                                if (GameWorld.Direction == 0)
+                                {
+                                    //
+                                }
+                                else if (GameWorld.Direction == 1)
+                                {
+                                    compass.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                                }
+                                else if (GameWorld.Direction == 2)
+                                {
+                                    compass.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                                }
+                                else if (GameWorld.Direction == 3)
+                                {
+                                    compass.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                                }
+                                CompassBox.Image = compass;
+                            }
+                            else
                             {
                                 //
-                            } else if (GameWorld.Direction == 1)
-                            {
-                                compass.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                            } else if (GameWorld.Direction == 2)
-                            {
-                                compass.RotateFlip(RotateFlipType.Rotate180FlipNone);
-                            } else if (GameWorld.Direction == 3)
-                            {
-                                compass.RotateFlip(RotateFlipType.Rotate90FlipNone);
                             }
-                            CompassBox.Image = compass;
-                        }
-                        else
-                        {
-                            //
-                        }
                     }
                 }
                 else if (s == "worldbuild")
