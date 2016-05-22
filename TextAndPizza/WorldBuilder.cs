@@ -248,51 +248,63 @@ namespace TextAndPizza
             showAll();
         }
 
+        private string ParseRoomId(string id)
+        {
+            var commaIndex = id.IndexOf(',');
+
+            if (commaIndex == -1)
+            {
+                return id;
+            }
+
+            return id.Substring(1, commaIndex - 1);
+        }
+
         private void NorthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (NorthExitCombo.Text.Contains(selected.Text))
+            if (ParseRoomId(NorthExitCombo.Text) == selected.Text)
             {
                 WorldBuild.worldRooms[selected.Text].setNorthExit(null);
             }
             else
             {
-                WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[NorthExitCombo.Text]);
+                WorldBuild.worldRooms[selected.Text].setNorthExit(WorldBuild.worldRooms[ParseRoomId(NorthExitCombo.Text)]);
             }
         }
 
         private void EastExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (EastExitCombo.Text.Contains(selected.Text))
+            if (ParseRoomId(EastExitCombo.Text) == selected.Text)
             {
                 WorldBuild.worldRooms[selected.Text].setEastExit(null);
             }
             else
             {
-                WorldBuild.worldRooms[selected.Text].setEastExit(WorldBuild.worldRooms[EastExitCombo.Text]);
+                WorldBuild.worldRooms[selected.Text].setEastExit(WorldBuild.worldRooms[ParseRoomId(EastExitCombo.Text)]);
             }
         }
 
         private void SouthExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SouthExitCombo.Text.Contains(selected.Text))
+            if (ParseRoomId(SouthExitCombo.Text) == selected.Text)
             {
                 WorldBuild.worldRooms[selected.Text].setSouthExit(null);
             }
             else
             {
-                WorldBuild.worldRooms[selected.Text].setSouthExit(WorldBuild.worldRooms[SouthExitCombo.Text]);
+                WorldBuild.worldRooms[selected.Text].setSouthExit(WorldBuild.worldRooms[ParseRoomId(SouthExitCombo.Text)]);
             }
         }
 
         private void WestExitCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (WestExitCombo.Text.Contains(selected.Text))
+            if (ParseRoomId(WestExitCombo.Text) == selected.Text)
             {
                 WorldBuild.worldRooms[selected.Text].setWestExit(null);
             }
             else
             {
-                WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[WestExitCombo.Text]);
+                WorldBuild.worldRooms[selected.Text].setWestExit(WorldBuild.worldRooms[ParseRoomId(WestExitCombo.Text)]);
             }
         }
 
