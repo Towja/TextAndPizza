@@ -403,6 +403,7 @@ namespace TextAndPizza
                             {
                                 if (words[1] == en.getName().ToLower())
                                 {
+                                    Combat(en, GameWorld.Player);
                                     Combat(GameWorld.Player, en);
                                     if (en.isDead())
                                     {
@@ -440,7 +441,7 @@ namespace TextAndPizza
                 {
                     PrintMessage("==Stats==" + Environment.NewLine
                         + "STRENGTH: " + GameWorld.Player.getStrength() + Environment.NewLine
-                        + "TOUGHNESS:" + GameWorld.Player.getDefence() + Environment.NewLine
+                        + "DEFENCE:" + GameWorld.Player.getDefence() + Environment.NewLine
                         + "HEALTH: " + GameWorld.Player.getHealth() + "/" + GameWorld.Player.getMaxHealth() + Environment.NewLine
                         );
                 }
@@ -566,7 +567,7 @@ namespace TextAndPizza
             return msg;
         }
 
-        public void Combat(Entity p, Entity m)
+        public void OldCombat(Entity p, Entity m)
         {
             Random rnd = new Random();
             int phitroll = rnd.Next(20);
@@ -634,6 +635,29 @@ namespace TextAndPizza
             if (m.isDead())
             {
                 PrintMessage(m.getName() + " died.");
+            }
+        }
+
+        public void Combat(Entity att, Entity def)
+        {
+            Random d = new Random();
+            int attroll = d.Next(20);
+            int defroll = d.Next(20);
+            //Check if blow can penetrate
+            if (attroll + att.getStrength() > defroll + def.getStrength())
+            {
+                int dammult = d.Next(200) / 100;
+                int damage = dammult * att.getStrength();
+                def.DealDamage(damage);
+                PrintMessage(att.getName() + " attacked and dealt " + damage.ToString() + " damage.");
+                if (def.isDead())
+                {
+                    PrintMessage(def.getName() + " died!");
+                }
+            }
+            else
+            {
+                PrintMessage(att.getName() + " attacked but missed");
             }
         }
 

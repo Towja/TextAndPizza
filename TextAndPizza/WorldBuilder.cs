@@ -126,6 +126,7 @@ namespace TextAndPizza
             StartingRoomLabel.Visible = false;
             StartingRoomCombo.Visible = false;
             ItemEntityTabs.Visible = false;
+            newToolStripMenuItem.Available = false;
         }
 
         private void showAll()
@@ -148,6 +149,7 @@ namespace TextAndPizza
             StartingRoomLabel.Visible = true;
             StartingRoomCombo.Visible = true;
             ItemEntityTabs.Visible = true;
+            newToolStripMenuItem.Available = true;
         }
 
         private void makeEditable()
@@ -465,7 +467,7 @@ namespace TextAndPizza
         {
             if (selectedItem != null)
             {
-                selectedRoom.changeItemDefence(selectedItem.Text, Int32.Parse(ItemStrength.Text));
+                selectedRoom.changeItemDefence(selectedItem.Text, Int32.Parse(ItemDefence.Text));
             }
         }
 
@@ -535,7 +537,7 @@ namespace TextAndPizza
         {
             try
             {
-                if (EntityHealth != null)
+                if (EntityHealth.Text != "")
                 {
                     selectedE.setMaxHealth(Int32.Parse(EntityHealth.Text));
                 }
@@ -561,7 +563,7 @@ namespace TextAndPizza
         {
             try
             {
-                if (EntityStrength.Text != null)
+                if (EntityStrength.Text != "")
                 {
                     selectedE.setStrength(Int32.Parse(EntityStrength.Text));
                 }
@@ -577,7 +579,7 @@ namespace TextAndPizza
         {
             try
             {
-                if (EntityDefence.Text != null)
+                if (EntityDefence.Text != "")
                 {
                     selectedE.setDefence(Int32.Parse(EntityDefence.Text));
                 }
