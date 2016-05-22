@@ -161,7 +161,6 @@ namespace TextAndPizza
         {
             // Filename to load from
             String fileName = Environment.ExpandEnvironmentVariables(path);
-            //String fileName = Environment.ExpandEnvironmentVariables("%AppData%\\savefile.bin");
 
             if (Path.GetExtension(path) == extension)
             {
