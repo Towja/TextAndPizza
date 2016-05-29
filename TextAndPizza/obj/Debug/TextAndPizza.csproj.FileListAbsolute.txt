@@ -31,3 +31,7 @@ C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizz
 C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizza.application
 C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.exe.manifest
 C:\Users\townej\Documents\GitHub\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.application
+C:\Users\walshb\OneDrive\Personal\Programming\Projects\TextAndPizza\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizza.exe.manifest
+C:\Users\walshb\OneDrive\Personal\Programming\Projects\TextAndPizza\TextAndPizza\TextAndPizza\bin\Debug\TextAndPizza.application
+C:\Users\walshb\OneDrive\Personal\Programming\Projects\TextAndPizza\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.exe.manifest
+C:\Users\walshb\OneDrive\Personal\Programming\Projects\TextAndPizza\TextAndPizza\TextAndPizza\obj\Debug\TextAndPizza.application
