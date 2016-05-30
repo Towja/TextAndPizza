@@ -486,9 +486,70 @@ namespace TextAndPizza
             }
             else
             {
-                if (s == "load")
+                if (s.Split(' ')[0] == "load")
                 {
-                    if (LoadWorldDialog.ShowDialog() == DialogResult.OK)
+                    if (s.Split(' ').Length > 1)
+                    {
+                        string InputPath = Environment.ExpandEnvironmentVariables("%APPDATA%/textandpizza/" + s.Split(' ')[1]);
+
+                        bool saveFile = false;
+                        bool worldFile = false;
+
+                        if (File.Exists(InputPath + ".tapwf"))
+                        {
+                            worldFile = true;
+                        }
+                        else if (File.Exists(InputPath + ".tapsf"))
+                        {
+                            saveFile = true;
+                        }
+
+                        World GameWorld = null;
+                        if (!saveFile && !worldFile)
+                        {
+                            PrintMessage("File " + s.Split(' ')[1] + ".tapsv/.tapwf could not be found!" + Environment.NewLine);
+                            return;
+                        }
+                        else if (worldFile)
+                        {
+                            GameWorld = World.Load(InputPath + ".tapwf", ".tapwf");
+                        }
+                        else if (saveFile)
+                        {
+                            GameWorld = World.Load(InputPath + ".tapsv", ".tapsv");
+                        }
+
+                        if (GameWorld != null)
+                        {
+                            PrintMessage("Game loaded!" + Environment.NewLine);
+                            gameStarted = true;
+                            // Print the current room's string to orient the player with their new world
+                            PrintMessage(RoomString(GameWorld.CurrentRoom));
+                            Image compass = CompassBox.Image;
+                            if (GameWorld.Direction == 0)
+                            {
+                                //
+                            }
+                            else if (GameWorld.Direction == 1)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            }
+                            else if (GameWorld.Direction == 2)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate180FlipNone);
+                            }
+                            else if (GameWorld.Direction == 3)
+                            {
+                                compass.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                            }
+                            CompassBox.Image = compass;
+                        }
+                        else
+                        {
+                            //
+                        }
+                    }
+                    else if (LoadWorldDialog.ShowDialog() == DialogResult.OK)
                     {
                         string filePath = LoadWorldDialog.FileName;
                             worldPath = filePath;
