@@ -492,29 +492,20 @@ namespace TextAndPizza
                     {
                         string InputPath = Environment.ExpandEnvironmentVariables("%APPDATA%/textandpizza/" + s.Split(' ')[1]);
 
-                        bool saveFile = false;
-                        bool worldFile = false;
+                        bool fileExists = false;
 
-                        if (File.Exists(InputPath + ".tapwf"))
+                        if (File.Exists(InputPath + ".tapsv"))
                         {
-                            worldFile = true;
-                        }
-                        else if (File.Exists(InputPath + ".tapsf"))
-                        {
-                            saveFile = true;
+                            fileExists = true;
                         }
 
                         World GameWorld = null;
-                        if (!saveFile && !worldFile)
+                        if (!fileExists)
                         {
-                            PrintMessage("File " + s.Split(' ')[1] + ".tapsv/.tapwf could not be found!" + Environment.NewLine);
+                            PrintMessage("File " + s.Split(' ')[1] + ".tapsv could not be found!" + Environment.NewLine);
                             return;
                         }
-                        else if (worldFile)
-                        {
-                            GameWorld = World.Load(InputPath + ".tapwf", ".tapwf");
-                        }
-                        else if (saveFile)
+                        else
                         {
                             GameWorld = World.Load(InputPath + ".tapsv", ".tapsv");
                         }
