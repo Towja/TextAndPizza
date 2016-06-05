@@ -497,9 +497,9 @@ namespace TextAndPizza
                         if (File.Exists(InputPath + ".tapsv"))
                         {
                             fileExists = true;
+                            worldPath = InputPath;
                         }
 
-                        World GameWorld = null;
                         if (!fileExists)
                         {
                             PrintMessage("File " + s.Split(' ')[1] + ".tapsv could not be found!" + Environment.NewLine);
