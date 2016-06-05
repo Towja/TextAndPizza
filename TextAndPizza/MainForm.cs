@@ -455,6 +455,11 @@ namespace TextAndPizza
                 {
                     PrintMessage("You have already started a game!");
                 }
+                else if (s == "worldbuild")
+                {
+                    WorldBuilder wbform = new WorldBuilder();
+                    wbform.Show();
+                }
                 else if (s == "more worlds" || s == "download worlds")
                 {
                     PrintMessage("Download more worlds here: " + Environment.NewLine + "https://drive.google.com/folderview?id=0B-3zMtsP_y-9TjVXYTMtUHV4R0U&usp=sharing");
